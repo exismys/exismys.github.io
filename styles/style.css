@@ -63,7 +63,7 @@ section h1 {
     font-size: 4rem;
 }
 
-section-size{
+section p{
     font-size: 1.5rem;
 }
 
@@ -81,4 +81,8 @@ section-size{
     width: 100%;
     flex: 0 0 auto;
     scroll-snap-align: center;
+}
+
+section .navdots {
+    display: inline-block;
 }
