@@ -67,6 +67,18 @@ section-size{
     font-size: 1.5rem;
 }
 
-section h1{
+.subcontainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll; 
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
 
+.subsection{
+    width: 100%;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
 }
