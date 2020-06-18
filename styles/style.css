@@ -86,3 +86,14 @@ section p{
 section .navdots {
     display: inline-block;
 }
+
+#Home img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    float: left;
+}
+
+#Home .seccontainer h2{
+    font-size: 2rem;
+}
