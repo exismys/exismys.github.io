@@ -75,9 +75,10 @@ section p{
 }
 
 .subcontainer{
-    width: 96%;
-    box-shadow: 0rem 0rem 1rem #000000;
-    border-radius: 1rem;
+    width: 100%-2rem;
+    margin: 1rem;
+    box-shadow: 0rem 0rem 0.5rem #000;
+    border-radius: 1rem 1rem 0 0;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll; 
@@ -110,12 +111,12 @@ section navdots {
 button{
     background: #222;
     border: solid #dd4124;
-    border-radius: 1rem;
     color: #dd4124;
     padding: 1rem;
-    transition: 1s ease;
+    transition: 0.3s ease;
+    margin: 1rem;
 }
 
 button:hover{
-    background: #111;
+    background: #333;
 }
