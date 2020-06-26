@@ -1,0 +1,102 @@
+header{
+    max-width: 855px;
+    margin: auto;
+}
+main{
+    color: white;
+}
+
+header, main, footer{
+    min-width: 855px;
+}
+
+.container{
+    max-width: 855px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.container .float-left{
+    width: 510px;
+    float: left;
+}
+
+.container .float-left .mini-grid{
+    float: left;
+    margin-left: 150px;
+}
+
+.container .float-left .grid{
+    float: right;
+}
+
+.container .float-right{
+    width: 260px;
+    float: right;
+}
+
+.grid
+{
+    width: 200px;
+    height: 400px;
+    background-color: rgba(230, 230, 250, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid div{
+    width: 20px;
+    height: 20px;
+}
+
+.tetromino{
+    background-color: blue;
+}
+
+.mini-grid{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(230, 230, 250, 0.5);
+}
+
+.mini-grid div{
+    width: 20px;
+    width: 20px;
+}
+
+.button{
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: white;
+}
+#up-button, #down-button{
+    margin-left: 35px;
+}
+.control-button .button{
+    margin-top: 10px;
+    width: 70px;
+    border: 1px solid white;
+    transition: 1s ease;
+}
+
+.control-button .button:focus{
+    border: 3px solid white;
+}
+
+.float-right h3.controls{
+    margin-top: 60px;
+}
+
+.setting-button{
+    margin-top: 30px;
+}
+
+#score{
+    border: 1px solid white;
+    padding: 5px 10px;
+}
+
