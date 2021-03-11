@@ -1,6 +1,6 @@
 var idblock = document.getElementById("block1")
 var marginLeft = 0, marginTop = 0;
-var marginLeftLimit = 100, marginTopLimit = 100;
+var marginLeftLimit = 100, marginTopLimit = 179;
 var marginLeftState = true, marginTopState = true;
 
 function moveBlock(){
