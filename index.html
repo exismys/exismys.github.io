@@ -3,67 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exismys</title>
-    <link rel = "stylesheet" href = "styles/style.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+        p {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 1rem 0;
+        }
+        ul {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 1rem 0;
+        }
+        li {
+            margin: 0.5rem 0;
+        }
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+        .intro {
+            margin: 1rem 0;
+        }
+        .social {
+            margin: 1rem 0;
+        }
+        .skills {
+            margin: 1rem 0;
+        }
+    </style>
+    <title>Ritesh Patel</title>
 </head>
 <body>
-    <div class="container">
-        <nav class = "navbar">
-            <ul>
-                <li class = "active"><a href = "#Home">Home</a></li>
-                <li><a href = "#About">About</a></li>
-                <li><a href = "#Projects">Projects</a></li>
-                <li><a href = "#Skills">Skills</a></li>
-                <li><a href = "#Contact">Contact</a></li>
-            </ul>
-        </nav>
+    <article class="intro">
+        <h2>👤 Intro</h2>
+        <p>In essence, I am an explorer.</p>
+        <p>Professionally, I am a software engineer, currently working as a software intern.</p>
+    </article>
 
-        <section id="Home">
-            <div class = "seccontainer">
-                <h1>Hello friend.</h1>
-                <img src = "media/profilepic.jpg" alt = "profile pic">
-                <h2>I am Ritesh!</h2>
-                <h3>Computer Programmer 💻</h3>
-                <h4>and</h4> <h3 class = "changeWord"></h3>
-            </div>
-        </section>
+    <article class="social">
+        <h2>👥 Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/exismys/">🔗 LinkedIn</a></li>
+            <li><a href="https://github.com/exismys/">🔗 GitHub</a></li>
+        </ul>
+    </article>
 
-        <section id="About">
-            <h1>About</h1>
-            <p>Hi, I am Ritesh.<br>I'm a student learning web development, computer programming in general. This portfolio is a part of things I'm doing right now to improve my programming and design skills.</p>
-        </section>
-
-        <section id="Projects">
-            <h1>Projects</h1>
-            <p>(Swipe left/Right to see more)</p>
-            <div class = "subcontainer">
-                <div class = "subsection">
-                    <h2>Image Gallery</h2>
-                    <p>It is a simple image search web app which showing matching images to the search using flikr API.</p>
-                    <a href = "https://github.com/exismys/exismys.github.io"><button>View Source Code</button></a>
-                    <a href = "flickr.html"><button>View Project</button></a>
-                </div>
-                <div class = "subsection">
-                    <h2>Jumping ball</h2>
-                    <p>A fun thing I created randomly.</p>
-                    <a href = "https://github.com/exismys/exismys.github.io"><button>View Source Code</button></a>
-                    <a href = "web/main.html"><button>View Project</button></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="Skills">
-            <h1>Skills</h1>
-            <p>I mainly work with C, C++, HTML, CSS, JavaScript, Java and Python.</p>
-        </section>
-
-        <section id="Contact">
-            <h1>Contact</h1>
-            <p>Join me on GitHub: <a href = "https://github.com/exismys">https://github.com/exismys</a></p>
-            <p>Join me on twitter: <a href = "https://twitter.com/exismys">@exismys</a></p>
-            <p>Join me on LinkedIn: <a href = "https://www.linkedin.com/in/exismys/">https://www.linkedin.com/in/exismys/</a></p>
-        </section>
-    </div>
-    <script src = "scripts/app.js"></script>
+    <article class="skills">
+        <h2>🛠 Technical Skills</h2>
+        <h3>🌐 Web Development</h3>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Node.js</li>
+            <li>Express</li>
+            <li>MongoDB</li>
+        </ul>
+        <h3>📱 Android App Development</h3>
+        <ul>
+            <li>Java</li>
+            <li>Kotlin</li>
+            <li>XML</li>
+            <li>Android Studio</li>
+        </ul>
+        <h3>♾️ DevOps</h3>
+        <ul>
+            <li>CI</li>
+            <li>Docker</li>
+            <li>AWS</li>
+            <li>Nginx</li>
+        </ul>
+    </article>
 </body>
 </html>
