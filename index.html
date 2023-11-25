@@ -1,112 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ritesh</title>
-<style>
-    body {
-        background-color: #7283b3;
-        color: rgb(45, 45, 45);
-    }
-    a {
-        color: rgb(164, 196, 241);
-        text-decoration: none;
-    }
-</style>
-</head>
-<body>
-<pre>
-
- 👤 About  
- - - - - - - - - - - - - - - - - - - - -
-
-   Name:       Ritesh Patel
-   Age:        22
-   Location:   Hyderabad, India
-   Occupation: Software Engineer
-   Email:      riteshzeronity@gmail.com
-
- 🔗 Social  
- - - - - - - - - - - - - - - - - - - - -
-
-   GitHub:     <a href="https://github.com/exismys/" target="_blank">@exismys</a>
-   LinkedIn:   <a href="https://linkedin.com/in/exismys/" target="_blank">@exismys</a>
-   
-
- 📄 Tiny CV
- - - - - - - - - - - - - - - - - - - - - 
-
-   Current:
-
-   - Pragmatic Play
-     Software Intern
-
-   Education:
-   
-   - Bachelor of Technology
-     Computer Science & Engineering
-     Lovely Professional University
-     2019 - 2023
-
-   Skills:
-
-   - Programming Languages
-     C, C++, Java, Python, JavaScript, 
-     Kotlin
-
-   - Web Development
-     HTML, CSS, JavaScript, Node, 
-     Express, MongoDB
-
-   - Android Development
-     Java, Kotlin, XML, Android Studio
-
-   - DevOps
-     Git, GitHub, Docker, Jenkins, AWS,
-     Ansible
-
-   - Concepts
-     OOP, Data Structures, Algorithms,
-     Databases, Networking, CI/CD
-   
-   - Other
-     Linux, Bash, SQL, Nginx
-
-   Projects:
-
-   - Sorting Algorithm Visualizer
-     A web app that visualizes various
-     sorting algorithms.
-     <a href="https://github.com/exismys/SortingAlgorithmVisualizer" target="_blank">GitHub</a>, <a href="https://exismyssav.netlify.app/">Live</a>
-
-   - ExisChessclock
-     A chess clock app for Android.
-     <a href="https://github.com/exismys/ExisChessclock.git" target="_blank">GitHub</a>
-
-   - Vocab
-     An android app that helps you 
-     learn new words using flashcards.
-     <a href="https://github.com/exismys/Vocab.git" target="_blank">GitHub</a>
-
-   - Calculator
-     A simple calculator app for 
-     Android.
-     <a href="https://github.com/exismys/Calculator.git" target="_blank">GitHub</a>
-
- 🙋 QA
- - - - - - - - - - - - - - - - - - - - - 
-
-   Q: What's with all the text?
-   A: It's simple. I like it.
-
-   Q: Got any other sites?
-   A: I'm working on it. Check back in
-      15 years.
-
-   Q: Best way to get in touch?
-   A: Here.
-   
-</pre>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><!-- The title will be dynamically inserted here --></title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" type="image/png" href="/images/infinity.png">
+    <script src="js/layout.js" defer></script>
+  </head>
+  <body>
+    <nav id="nav-bar">
+      <p id="nav-toggler" onclick="toggle();">>></p>
+      <ul id="nav-links" class="hidden">
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Log In</a></li>
+      </ul>
+    </nav>
+    <main>
+      <article class="intro">
+        <h2>👤 Who am I?</h2>
+        <p>I keep asking the same question myself.</p>
+        <p>In essence, I am an explorer.</p>
+        <p>I created this website to document whatever I find interesting while I'm exploring and also because I'm learning web development :)</p>
+        <p>My blogs may include content related to (but not limited to) subjects like</p>
+        <ul>
+          <li>💻 Computer Programming</li>
+          <li>📈 Mathematics</li>
+          <li>📡 Physics</li>
+          <li>💭 Philosophy</li>
+          <li>🎨 Art</li>
+        </ul>
+      </article>
+      <article class="social">
+        <h2>🔗 Social</h2>
+        <ul class="social-links">
+          <li class="twitter">Twitter:
+            <a href="https://twitter.com/exismys">@exismys</a>
+          </li>
+          <li class="github">GitHub:
+            <a href="https://github.com/exismys">@exismys</a>
+          </li>
+          <li class="linkedin">LinkedIn:
+            <a href="https://www.linkedin.com/in/exismys/">@exismys</a>
+          </li>
+        </ul>
+      </article>
+      <article class="skills">
+        <h2>🛠 Technical Skills</h2>
+        <h3>🌐 Web Development</h3>
+        <ul class="tech-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>MongoDB</li>
+        </ul>
+        <h3>⚙️ DevOps</h3>
+        <ul class="tech-list">
+          <li>Docker</li>
+          <li>Bash</li>
+          <li>Python</li>
+          <li>Ansible</li>
+          <li>Jenkins</li>
+          <li>SSH</li>
+          <li>Nginx</li>
+        </ul>
+        <h3>📱 Android App Development</h3>
+        <ul class="tech-list">
+          <li>Java</li>
+          <li>Kotlin</li>
+          <li>Android Studio</li>
+        </ul>
+        <h3>🔍 Tools / Platforms</h3>
+        <ul class="tech-list">
+          <li>Visual Studio Code</li>
+          <li>Android Studio</li>
+          <li>Git</li>
+          <li>GitHub</li>
+        </ul>
+      </article>
+    </main>
+    <footer>
+      <p id="copyright">&copy; exismys.me</p>
+    </footer>
+  </body>
 </html>
