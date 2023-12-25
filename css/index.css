@@ -73,31 +73,3 @@ body {
     margin: 8px 8px;
     border: none;
 }
-
-.box ul {
-    list-style-type: none;
-    list-style-position: inside;
-    /* padding-bottom: 8px;
-    padding-left: 16px; */
-}
-
-.box li {
-    /* line-height: 1.5rem; */
-}
-
-.social-links a {
-    /* float: right;
-    text-decoration: none; */
-}
-
-.tech-list {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.tech-list li {
-    padding: 0px 8px;
-    border: 1px solid #666;
-    margin: 4px 8px 4px 0px;
-    border-radius: 8px;
-}
