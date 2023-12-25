@@ -40,11 +40,7 @@ body {
 .box {
     padding: 10px;
     margin-bottom: 10px;
-    border: black 1px solid;
-    opacity: 0.5;
-    background-color: #666;
-    /* box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.5); */
-    /* justify-content: space-between; */
+    background-color: rgba(97, 97, 97, 0.5);
     overflow: hidden;
     z-index: 1;
 }
@@ -64,13 +60,18 @@ body {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-blockquote {
+.box blockquote {
     font-size: 1.5rem;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     background-color: rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 8px 8px;
+}
+
+.box iframe {
+    margin: 8px 8px;
+    border: none;
 }
 
 .box ul {
