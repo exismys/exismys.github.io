@@ -1,51 +1,92 @@
-article {
-    color: #c8c8c8;
-    padding: 16px;
-    margin-top: 24px;
-    background-color: rgba(12, 12, 12, 1);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Pacifico);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-article ul:last-child {
-    padding-bottom: 0;
+body {
+    background-image: url(../assets/m51.jpg);
+    background-size: cover;
 }
 
-article h2 {
-    padding-bottom: 16px;
-    font-family: arial;
-    font-size: 36px;
+.container {
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    columns: 3;
+    padding: 10px;
+    overflow: hidden;
 }
 
-article h3 {
-    font-family: arial;
-    font-size: 22px;
-    padding-bottom: 8px;
+@media screen and (max-width: 600px) {
+    .container {
+        column-count: 1;
+    }
 }
 
-article p {
-    font-family: arial;
-    padding-bottom: 8px;
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .container {
+        column-count: 2;
+    }
 }
 
-article ul {
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+    .container {
+        column-count: 3;
+    }
+}
+
+.box {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: black 1px solid;
+    opacity: 0.5;
+    background-color: #666;
+    /* box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.5); */
+    /* justify-content: space-between; */
+    overflow: hidden;
+    z-index: 1;
+}
+
+.box h2 {
+    font-family: "Pacifico", cursive;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 8px;
+}
+
+.box p {
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+blockquote {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 8px 8px;
+}
+
+.box ul {
     list-style-type: none;
     list-style-position: inside;
-    padding-bottom: 8px;
-    padding-left: 16px;
+    /* padding-bottom: 8px;
+    padding-left: 16px; */
 }
 
-article li {
-    font-family: arial;
-    line-height: 1.5rem;
-}
-
-.social-links {
-    width: 70%;
+.box li {
+    /* line-height: 1.5rem; */
 }
 
 .social-links a {
-    float: right;
-    text-decoration: none;
+    /* float: right;
+    text-decoration: none; */
 }
 
 .tech-list {
@@ -58,11 +99,4 @@ article li {
     border: 1px solid #666;
     margin: 4px 8px 4px 0px;
     border-radius: 8px;
-}
-
-h1 {
-    margin-top: 24px;
-    font-size: 44px;
-    font-family: arial;
-    text-align: center;
 }
