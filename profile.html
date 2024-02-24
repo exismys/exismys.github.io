@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ritesh</title>
-<style>
-    body {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ritesh</title>
+    <link rel="stylesheet" href="css/nav.css" />
+    <script src="js/nav.js" defer></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
         background-color: #1f1f1f;
         color: rgb(191, 188, 188);
-    }
-    a {
+      }
+      a {
         color: rgb(119, 171, 244);
         text-decoration: none;
-    }
-    div {
+      }
+      div {
         margin: 0 auto;
         max-width: 800px;
         padding: 0 1rem;
-    }
-</style>
-</head>
-<body>
-<div>
-<pre>
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="nav-bar">
+      <p id="nav-toggler" onclick="toggle();">>></p>
+      <ul id="nav-links" class="hidden">
+        <li><a href="index.html">Essence</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="explore.html">Explore</a></li>
+      </ul>
+    </nav>
+    <div>
+      <pre>
 
  👤 About  
  - - - - - - - - - - - - - - - - - - - -
@@ -117,6 +132,6 @@
    A: Yes, <a href="https://riteshis.live/" target="_blank">version 1.0</a>
    
 </pre>
-</div>
-</body>
+    </div>
+  </body>
 </html>
