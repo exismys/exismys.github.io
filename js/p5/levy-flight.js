@@ -13,7 +13,6 @@ let canvasTwo = function(sketch) {
         color = [255, 255, 255];
     }
 
-
     sketch.draw = function() {
         sketch.stroke(color[0], color[1], color[2]);
         sketch.strokeWeight(2);
@@ -26,6 +25,10 @@ let canvasTwo = function(sketch) {
             color = [sketch.random(255), sketch.random(255), sketch.random(255)];
         } else {
             step.setMag(2);
+        }
+        if (pos.x > sketch.width || pos.x < 0 || pos.y > sketch.height || pos.y < 0) {
+            pos.set(sketch.width/2, sketch.height/2);
+            prev.set(pos);
         }
         pos.add(step);
     }
