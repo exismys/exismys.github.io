@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>exismys</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/nav.css" />
     <link rel="shortcut icon" type="image/png" href="/assets/jupiter.png" />
     <script src="js/nav.js" defer></script>
     <script src="lib/p5.min.js"></script>
-    <script src="js/p5/Walker.js"></script>
+    <script src="js/p5/walker.js"></script>
+    <script src="js/p5/levy-flight.js"></script>
+    <style>
+      .container {
+        font-family: "Montserrat", sans-serif;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .canvas-container {
+        flex: 1 1 calc(50% - 10px);
+        min-width: 0;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body>
     <nav id="nav-bar">
@@ -21,9 +46,13 @@
       </ul>
     </nav>
     <div class="container">
-      <div id="walker">
+      <div class="canvas-container">
+        <h2>Walker</h2>
+        <div id="walker" class="canvas"></div>
       </div>
-      <div id="levy-flight">
+      <div class="canvas-container">
+        <h2>Levy Flight</h2>
+        <div id="levy-flight" class="canvas"></div>
       </div>
     </div>
   </body>
