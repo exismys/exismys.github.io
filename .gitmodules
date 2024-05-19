@@ -1,0 +1,3 @@
+[submodule "SortingAlgorithmVisualizer"]
+	path = SortingAlgorithmVisualizer
+	url = https://github.com/exismys/SortingAlgorithmVisualizer.git
