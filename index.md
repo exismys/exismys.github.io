@@ -2,9 +2,5 @@
 layout: home
 ---
 
-# Welcome to My Blog
-
-This is my personal blog and portfolio site.
-
-## Recent Posts
+Well, I suppose this is my home page. I have to learn this Jekyll template so that I can modify it later. It's a work in progress :)
 
