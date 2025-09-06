@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Sound Sampling: Creating a Sound of a Certain Frequency Programmatically
-date: 2025-09-07 10:00:00 +0530
+date: 2025-09-07 04:00 +0530
 categories: blog
 ---
 
