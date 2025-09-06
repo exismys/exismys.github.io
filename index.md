@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Home
+title: Hello!
 permalink: /
 ---
 
-## Hello, my fellow sentient beings!
+## My fellow sentient beings!
 
 Well, my name is Ritesh Patel. I'm from a small village near Varanasi.
 
