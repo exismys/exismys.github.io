@@ -9,3 +9,7 @@ theme: minima
 
 plugins:
   - jekyll-sitemap
+
+header_pages:
+  - index.md
+  - blog.md

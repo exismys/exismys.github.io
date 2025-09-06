@@ -1,6 +1,7 @@
 ---
-layout: home
-title: home
+layout: page
+title: Home
+permalink: /
 ---
 
 ## Hello, my fellow sentient beings!
