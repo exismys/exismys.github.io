@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Quotes That Speak to My Soul
-date: 2024-08-31 10:00:00 -0000
+date: 2024-08-31 10:00:00 +0530
 categories: blog
 ---
 
