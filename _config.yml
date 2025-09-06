@@ -1,0 +1,12 @@
+title: I want to write something here
+description: I don't know yet. Maybe a blog about whatever comes to mind. Math, Physics, Programming, whatever.
+baseurl: ""
+url: "https://exismys.github.io"
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
