@@ -2,7 +2,9 @@
 layout: home
 ---
 
-## Hello, my sentient fellow beings!
+# Home
+
+## Hello, my fellow sentient beings!
 
 Well, my name is Ritesh Patel. I'm from a small village near Varanasi.
 
