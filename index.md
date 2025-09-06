@@ -1,8 +1,7 @@
 ---
 layout: home
+title: home
 ---
-
-# Home
 
 ## Hello, my fellow sentient beings!
 
