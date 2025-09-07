@@ -67,6 +67,8 @@
                 }
                 
                 const files = await response.json();
+
+                console.log('Fetched files:', files);
                 
                 const blogFiles = files
                     .filter(file => {
