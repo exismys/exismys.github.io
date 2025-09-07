@@ -6,32 +6,50 @@ const BLOG_FOLDER_PATH = 'blogs';
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.content-section');
+
+    function showSection(targetSection) {
+        // Update active nav link
+        navLinks.forEach(nl => nl.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[data-section="${targetSection}"]`);
+        if (activeLink) activeLink.classList.add('active');
+        
+        // Show/hide sections
+        sections.forEach(section => {
+            if (section.id === `${targetSection}-section`) {
+                section.classList.remove('hidden');
+            } else {
+                section.classList.add('hidden');
+            }
+        });
+
+        // Load blogs if switching to blogs section
+        if (targetSection === 'blogs' && !document.querySelector('.blog-list')) {
+            fetchBlogList();
+        }
+    }
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetSection = this.dataset.section;
+
+            // Update URL hash
+            window.location.hash = targetSection;
             
-            // Update active nav link
-            navLinks.forEach(nl => nl.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show/hide sections
-            sections.forEach(section => {
-                if (section.id === `${targetSection}-section`) {
-                    section.classList.remove('hidden');
-                } else {
-                    section.classList.add('hidden');
-                }
-            });
-            
-            // Load blogs if switching to blogs section
-            if (targetSection === 'blogs' && !document.querySelector('.blog-list')) {
-                fetchBlogList();
-            }
+            showSection(targetSection);
         });
     });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.substring(1) || 'home';
+        showSection(hash);
+    });
     
+    // Load correct section on page load based on URL hash
+    const initialSection = window.location.hash.substring(1) || 'home';
+    showSection(initialSection);
+
     // Load blogs on initial page load
     fetchBlogList();
 });
