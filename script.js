@@ -1,6 +1,7 @@
 const GITHUB_USERNAME = 'exismys';
 const BLOG_REPO_NAME = 'blog';
 const BLOG_FOLDER_PATH = 'blogs';
+const TIL_FOLDER_PATH = 'til';
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load blogs on initial page load
     fetchBlogList();
+    fetchTILEntries();
 });
 
 async function fetchBlogList() {
@@ -189,4 +191,80 @@ function formatDate(date) {
         month: 'long',
         day: 'numeric'
     });
+}
+
+async function fetchTILEntries() {
+    const container = document.getElementById('til-container');
+    
+    try {
+        const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${BLOG_REPO_NAME}/contents/${TIL_FOLDER_PATH}/til.md`;
+        
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const fileData = await response.json();
+        const contentResponse = await fetch(fileData.download_url);
+        const content = await contentResponse.text();
+        
+        const tilEntries = parseSingleTILFile(content);
+        displayTILEntries(tilEntries);
+        
+    } catch (error) {
+        console.error('Error fetching TIL entries:', error);
+        container.innerHTML = `<p class="error">Error loading TIL entries: ${error.message}</p>`;
+    }
+}
+
+function parseSingleTILFile(content) {
+    const entries = [];
+    const sections = content.split(/^## (\d{4}-\d{2}-\d{2})$/gm);
+    
+    // Skip the first element (content before first date)
+    for (let i = 1; i < sections.length; i += 2) {
+        const dateStr = sections[i];
+        const entryContent = sections[i + 1];
+        
+        if (dateStr && entryContent) {
+            const date = new Date(dateStr);
+            
+            // Process content - convert basic markdown to HTML
+            let processedContent = entryContent.trim()
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic  
+                .replace(/`([^`]+)`/g, '<code>$1</code>') // Inline code
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>') // Links
+                .replace(/\n\n/g, '</p><p>') // Paragraphs
+                .replace(/\n/g, '<br>'); // Line breaks
+            
+            // Wrap in paragraph tags
+            processedContent = '<p>' + processedContent + '</p>';
+            
+            entries.push({
+                date: date,
+                content: processedContent
+            });
+        }
+    }
+    
+    return entries;
+}
+
+function displayTILEntries(entries) {
+    const container = document.getElementById('til-container');
+    
+    if (entries.length === 0) {
+        container.innerHTML = '<p>No TIL entries found.</p>';
+        return;
+    }
+    
+    const entriesHTML = entries.map(entry => `
+        <div class="til-entry">
+            <div class="til-date">${formatDate(entry.date)}</div>
+            <div class="til-content">${entry.content}</div>
+        </div>
+    `).join('');
+    
+    container.innerHTML = entriesHTML;
 }
