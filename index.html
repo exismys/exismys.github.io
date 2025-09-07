@@ -73,7 +73,7 @@
                 const blogFiles = files
                     .filter(file => {
                         const filename = file.name;
-                        return /^\d{2}-\d{2}-\d{2}\.(md|txt|html)$/i.test(filename);
+                        return /^\d{4}-\d{2}-\d{2}\.(md|txt|html)$/i.test(filename);
                     })
                     .map(file => {
                         const filename = file.name;
