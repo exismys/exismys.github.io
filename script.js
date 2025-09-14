@@ -113,9 +113,10 @@ function parseBlogMetadata(file, content) {
     let title = file.name;
     let date = new Date();
     let tags = [];
+    let url = file.html_url;
     
     // Parse the first few lines for metadata
-    for (let i = 0; i < Math.min(4, lines.length); i++) {
+    for (let i = 0; i < Math.min(5, lines.length); i++) {
         const line = lines[i].trim();
         
         // Parse title from markdown heading (# Title)
@@ -141,6 +142,18 @@ function parseBlogMetadata(file, content) {
             }
             continue;
         }
+
+        // Parse status line (**status:** `draft/published`)
+        if (line.includes('**status:**')) {
+            const statusMatch = line.match(/`(draft|published)`/i);
+            if (statusMatch && statusMatch[1].toLowerCase() === 'draft') {
+                // If status is draft, set date to a very old date to push it down the list
+                date = new Date('1970-01-01');
+                tags.push('draft');
+                url = '#'; // Disable link for drafts
+            }
+            continue;
+        }
     }
     
     return {
@@ -148,7 +161,7 @@ function parseBlogMetadata(file, content) {
         title: title,
         date: date,
         tags: tags,
-        url: file.html_url,
+        url: url,
         downloadUrl: file.download_url
     };
 }
