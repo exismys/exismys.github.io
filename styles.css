@@ -143,3 +143,8 @@ nav {
     border-radius: 3px;
     font-family: monospace;
 }
+
+a.til-expand {
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -272,12 +272,36 @@ function displayTILEntries(entries) {
         return;
     }
     
-    const entriesHTML = entries.map(entry => `
+    const entriesHTML = entries.map(entry => {
+        const truncated = entry.content.length > 300 ? entry.content.substring(0, 300) : entry.content;
+
+        return `
         <div class="til-entry">
             <div class="til-date">${formatDate(entry.date)}</div>
-            <div class="til-content">${entry.content}</div>
+            <div class="til-content">
+                <div class="til-short">${truncated}${entry.content.length > 300 ? ' <a href="#" class="til-expand">...</a>' : ''}</div>
+                <div class="til-full" style="display:none">${entry.content} <a href="#" class="til-collapse">Show less</a></div>
+            </div>
         </div>
-    `).join('');
+    `}).join('');
     
     container.innerHTML = entriesHTML;
+
+    container.querySelectorAll('.til-expand').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const entryDiv = e.target.closest('.til-entry');
+            entryDiv.querySelector('.til-short').style.display = 'none';
+            entryDiv.querySelector('.til-full').style.display = 'inline';
+        });
+    });
+
+    container.querySelectorAll('.til-collapse').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const entryDiv = e.target.closest('.til-entry');
+            entryDiv.querySelector('.til-short').style.display = 'inline';
+            entryDiv.querySelector('.til-full').style.display = 'none';
+        });
+    });
 }
