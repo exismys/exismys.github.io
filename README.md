@@ -1,3 +1,5 @@
 # README
 
-Just a static website, I guess... I have no idea what to do with this. For now, I display some blogs.
+Just a static website, I guess... I have no idea what to do with this. For now, I display:
+- Blogs
+- A brief description of my learnings 
