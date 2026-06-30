@@ -186,10 +186,17 @@ function displayBlogList(blogFiles) {
             : '';
         
         listItem.innerHTML = `
-            <a href="${blog.url}" class="blog-title" target="_blank">${blog.title}</a>
+            <span class="blog-title" data-url="${blog.downloadUrl}">${blog.title}</span>
             <div class="blog-meta">${formatDate(blog.date)}</div>
             ${tagsHTML}
         `;
+
+        // Open in modal instead of redirecting
+        const titleEl = listItem.querySelector('.blog-title');
+        if (blog.url !== '#') {
+            titleEl.style.cursor = 'pointer';
+            titleEl.addEventListener('click', () => openPostModal(blog.downloadUrl, blog.title));
+        }
         
         blogList.appendChild(listItem);
     });
@@ -241,18 +248,8 @@ function parseSingleTILFile(content) {
         
         if (dateStr && entryContent) {
             const date = new Date(dateStr);
-            
-            // Process content - convert basic markdown to HTML
-            let processedContent = entryContent.trim()
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-                .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic  
-                .replace(/`([^`]+)`/g, '<code>$1</code>') // Inline code
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>') // Links
-                .replace(/\n\n/g, '</p><p>') // Paragraphs
-                .replace(/\n/g, '<br>'); // Line breaks
-            
-            // Wrap in paragraph tags
-            processedContent = '<p>' + processedContent + '</p>';
+            // Use marked for proper Markdown rendering
+            const processedContent = marked.parse(entryContent.trim());
             
             entries.push({
                 date: date,
@@ -305,3 +302,56 @@ function displayTILEntries(entries) {
         });
     });
 }
+
+// ── Modal for rendering blog posts ──────────────────────────────────────────
+
+async function openPostModal(downloadUrl, title) {
+    const modal   = document.getElementById('post-modal');
+    const content = document.getElementById('post-modal-content');
+
+    content.innerHTML = '<p class="loading">Loading…</p>';
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    try {
+        const res = await fetch(downloadUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const md = await res.text();
+
+        // Render Markdown
+        content.innerHTML = marked.parse(md);
+
+        // Render LaTeX with KaTeX (auto-render)
+        if (window.renderMathInElement) {
+            renderMathInElement(content, {
+                delimiters: [
+                    { left: '$$',  right: '$$',  display: true  },
+                    { left: '$',   right: '$',   display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true  }
+                ],
+                throwOnError: false
+            });
+        }
+    } catch (err) {
+        content.innerHTML = `<p class="error">Failed to load post: ${err.message}</p>`;
+    }
+}
+
+function closePostModal() {
+    const modal = document.getElementById('post-modal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('post-modal-close').addEventListener('click', closePostModal);
+
+    document.getElementById('post-modal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closePostModal(); // backdrop click
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closePostModal();
+    });
+});

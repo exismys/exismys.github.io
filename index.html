@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exismys' Blog</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <!-- marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@13/marked.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -79,6 +85,14 @@
                 <p class="loading">Loading TIL entries...</p>
             </div>
         </section>
+
+    <!-- Post reader modal -->
+    <div id="post-modal" class="post-modal hidden">
+        <div class="post-modal-inner">
+            <button id="post-modal-close" aria-label="Close">&times;</button>
+            <article id="post-modal-content" class="post-content"></article>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
