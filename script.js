@@ -1,357 +1,270 @@
-const GITHUB_USERNAME = 'exismys';
-const BLOG_REPO_NAME = 'blog';
+// Configurations
 const BLOG_FOLDER_PATH = 'blogs';
-const TIL_FOLDER_PATH = 'til';
+const BLOG_INDEX = 'blog-index.json';
+const TIL_FOLDER_PATH  = 'til';
+const TIL_ENTRY_FILE = `til.md`
 
-// Navigation functionality
-document.addEventListener('DOMContentLoaded', function() {
+//===========================================================================
+// Navigation
+//===========================================================================
+let blogsLoaded = false;
+let tilLoaded   = false;
+
+document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section');
+    const sections = document.querySelectorAll('.section');
 
-    function showSection(targetSection) {
-        // Update active nav link
-        navLinks.forEach(nl => nl.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[data-section="${targetSection}"]`);
-        if (activeLink) activeLink.classList.add('active');
-        
-        // Show/hide sections
-        sections.forEach(section => {
-            if (section.id === `${targetSection}-section`) {
-                section.classList.remove('hidden');
-            } else {
-                section.classList.add('hidden');
-            }
-        });
+    function showSection(name) {
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === name));
+        sections.forEach(s => s.classList.toggle('active', s.id === `${name}-section`));
 
-        // Load blogs if switching to blogs section
-        if (targetSection === 'blogs' && !document.querySelector('.blog-list')) {
-            fetchBlogList();
-        }
+        if (name === 'blog' && !blogsLoaded) fetchBlogList();
+        if (name === 'til'  && !tilLoaded)   fetchTILEntries();
     }
-    
+
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', e => {
             e.preventDefault();
-            const targetSection = this.dataset.section;
-
-            // Update URL hash
-            window.location.hash = targetSection;
-            
-            showSection(targetSection);
+            const target = link.dataset.section;
+            history.pushState(null, '', `#${target}`);
+            showSection(target);
         });
     });
 
-    // Handle browser back/forward buttons
-    window.addEventListener('hashchange', function() {
-        const hash = window.location.hash.substring(1) || 'home';
-        showSection(hash);
+    window.addEventListener('popstate', () => {
+        showSection(window.location.hash.slice(1) || 'home');
     });
-    
-    // Load correct section on page load based on URL hash
-    const initialSection = window.location.hash.substring(1) || 'home';
-    showSection(initialSection);
 
-    // Load blogs on initial page load
-    fetchBlogList();
-    fetchTILEntries();
+    // Back button in post reader
+    document.getElementById('blog-back-btn').addEventListener('click', closePost);
+
+    const initial = window.location.hash.slice(1) || 'home';
+    showSection(initial);
 });
+//===========================================================================
 
+
+//===========================================================================
+// Blog List
+//===========================================================================
 async function fetchBlogList() {
+    blogsLoaded = true;
     const container = document.getElementById('blog-container');
-    
+
     try {
-        const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${BLOG_REPO_NAME}/contents/${BLOG_FOLDER_PATH}`;
-        
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const blogIndex = await fetch(`./${BLOG_FOLDER_PATH}/${BLOG_INDEX}`);
+        if (!blogIndex.ok) {
+            throw new Error(`Cound not fetch blog index at ./${BLOG_FOLDER_PATH}/${BLOG_INDEX}`);
         }
-        
-        const files = await response.json();
-        
-        // Filter for markdown, text, and html files
-        const blogFiles = files.filter(file => {
-            return /\.(md|txt|html)$/i.test(file.name) && file.type === 'file';
-        });
-        
-        // Fetch content for each blog file to parse metadata
-        const blogsWithMetadata = await Promise.all(
-            blogFiles.map(async (file) => {
+
+        const files = await blogIndex.json();
+
+        const blogsMeta = await Promise.all(
+            files.map(async fileName => {
+                const relativeUrl = `./${BLOG_FOLDER_PATH}/${fileName}`;
                 try {
-                    const contentResponse = await fetch(file.download_url);
-                    const content = await contentResponse.text();
-                    
-                    return parseBlogMetadata(file, content);
-                } catch (error) {
-                    console.error(`Error fetching content for ${file.name}:`, error);
+                    const content = await (await fetch(relativeUrl)).text();
+                    return parseMeta(fileName, content, relativeUrl);
+                } catch {
                     return {
-                        filename: file.name,
-                        title: file.name,
-                        date: new Date(file.name.match(/\d{4}-\d{2}-\d{2}/) || '2024-01-01'),
-                        tags: [],
-                        url: file.html_url,
-                        downloadUrl: file.download_url
+                        title: fileName, date: new Date(), tags: [],
+                        draft: false, downloadUrl: relativeUrl
                     };
                 }
             })
         );
-        
-        // Sort by date (newest first)
-        blogsWithMetadata.sort((a, b) => b.date - a.date);
-        
-        displayBlogList(blogsWithMetadata);
-        
-    } catch (error) {
-        console.error('Error fetching blog list:', error);
-        container.innerHTML = `<p class="error">Error loading blog posts: ${error.message}</p>`;
+
+        blogsMeta.sort((a, b) => b.date - a.date);
+        renderBlogList(blogsMeta);
+    } catch (err) {
+        container.innerHTML = `<p class="error">Could not load posts: ${err.message}</p>`;
     }
 }
 
-function parseBlogMetadata(file, content) {
-    const lines = content.split('\n').filter(line => line.trim() !== '');
-    
-    let title = file.name;
-    let date = new Date();
-    let tags = [];
-    let url = file.html_url;
-    
-    // Parse the first few lines for metadata
-    for (let i = 0; i < Math.min(5, lines.length); i++) {
-        const line = lines[i].trim();
-        
-        // Parse title from markdown heading (# Title)
-        if (line.startsWith('# ')) {
-            title = line.substring(2).trim();
-            continue;
-        }
-        
-        // Parse date line (**date:** `2025-09-07` `4:00` `UTC+5:30`)
-        if (line.includes('**date:**')) {
-            const dateMatch = line.match(/`(\d{4}-\d{2}-\d{2})`/);
-            if (dateMatch) {
-                date = new Date(dateMatch[1]);
-            }
-            continue;
-        }
-        
-        // Parse tags line (**tags:** `tag1` `tag2` `tag3`)
-        if (line.includes('**tags:**')) {
-            const tagMatches = line.match(/`([^`]+)`/g);
-            if (tagMatches) {
-                tags = tagMatches.map(match => match.replace(/`/g, ''));
-            }
-            continue;
-        }
+function parseMeta(fileName, content, relativeUrl) {
+    const lines  = content.split('\n').filter(l => l.trim());
+    let title    = fileName;
+    let date     = new Date();
+    let tags     = [];
+    let draft    = false;
 
-        // Parse status line (**status:** `draft/published`)
-        if (line.includes('**status:**')) {
-            const statusMatch = line.match(/`(draft|published)`/i);
-            if (statusMatch && statusMatch[1].toLowerCase() === 'draft') {
-                // If status is draft, set date to a very old date to push it down the list
-                date = new Date('1970-01-01');
+    for (let i = 0; i < Math.min(8, lines.length); i++) {
+        const l = lines[i].trim();
+
+        if (l.startsWith('# ')) {
+            title = l.slice(2).trim();
+        } else if (l.includes('**date:**')) {
+            const m = l.match(/`(\d{4}-\d{2}-\d{2})`/);
+            if (m) date = new Date(m[1]);
+        } else if (l.includes('**tags:**')) {
+            const m = l.match(/`([^`]+)`/g);
+            if (m) tags = m.map(t => t.replace(/`/g, ''));
+        } else if (l.includes('**status:**')) {
+            const m = l.match(/`(draft|published)`/i);
+            if (m?.[1]?.toLowerCase() === 'draft') {
+                draft = true;
+                date  = new Date('1970-01-01');
                 tags.push('draft');
-                url = '#'; // Disable link for drafts
             }
-            continue;
         }
     }
-    
-    return {
-        filename: file.name,
-        title: title,
-        date: date,
-        tags: tags,
-        url: url,
-        downloadUrl: file.download_url
-    };
+
+    return { title, date, tags, draft, downloadUrl: relativeUrl };
 }
 
-function displayBlogList(blogFiles) {
+function renderBlogList(blogsMeta) {
     const container = document.getElementById('blog-container');
-    
-    if (blogFiles.length === 0) {
-        container.innerHTML = '<p>No blog posts found.</p>';
+
+    if (!blogsMeta.length) {
+        container.innerHTML = '<p class="status">No posts yet.</p>';
         return;
     }
-    
-    const blogList = document.createElement('ul');
-    blogList.className = 'blog-list';
-    
-    blogFiles.forEach(blog => {
-        const listItem = document.createElement('li');
-        listItem.className = 'blog-item';
-        
-        const tagsHTML = blog.tags.length > 0 
-            ? `<div class="blog-tags">Tags: ${blog.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>`
+
+    const ul = document.createElement('ul');
+    ul.className = 'blog-list';
+
+    blogsMeta.forEach(meta => {
+        const li = document.createElement('li');
+        li.className = `blog-item${meta.draft ? ' is-draft' : ''}`;
+
+        const tagsHTML = meta.tags.length
+            ? `<div class="blog-tags">${meta.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
             : '';
-        
-        listItem.innerHTML = `
-            <span class="blog-title" data-url="${blog.downloadUrl}">${blog.title}</span>
-            <div class="blog-meta">${formatDate(blog.date)}</div>
+
+        li.innerHTML = `
+            <span class="blog-title">${meta.title}</span>
+            <div class="blog-meta">${formatDate(meta.date)}</div>
             ${tagsHTML}
         `;
 
-        // Open in modal instead of redirecting
-        const titleEl = listItem.querySelector('.blog-title');
-        if (blog.url !== '#') {
-            titleEl.style.cursor = 'pointer';
-            titleEl.addEventListener('click', () => openPostModal(blog.downloadUrl, blog.title));
+        if (!meta.draft) {
+            li.addEventListener('click', () => openPost(meta.downloadUrl));
         }
-        
-        blogList.appendChild(listItem);
+
+        ul.appendChild(li);
     });
-    
+
     container.innerHTML = '';
-    container.appendChild(blogList);
+    container.appendChild(ul);
 }
+//===========================================================================
 
-function formatDate(date) {
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-}
 
-async function fetchTILEntries() {
-    const container = document.getElementById('til-container');
-    
-    try {
-        const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${BLOG_REPO_NAME}/contents/${TIL_FOLDER_PATH}/til.md`;
-        
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const fileData = await response.json();
-        const contentResponse = await fetch(fileData.download_url);
-        const content = await contentResponse.text();
-        
-        const tilEntries = parseSingleTILFile(content);
-        displayTILEntries(tilEntries);
-        
-    } catch (error) {
-        console.error('Error fetching TIL entries:', error);
-        container.innerHTML = `<p class="error">Error loading TIL entries: ${error.message}</p>`;
-    }
-}
+//===========================================================================
+// Blog Reader
+//===========================================================================
+async function openPost(downloadUrl) {
+    const listView    = document.getElementById('blog-list-view');
+    const postView    = document.getElementById('blog-post-view');
+    const postContent = document.getElementById('blog-post-content');
 
-function parseSingleTILFile(content) {
-    const entries = [];
-    const sections = content.split(/^## (\d{4}-\d{2}-\d{2})$/gm);
-    
-    // Skip the first element (content before first date)
-    for (let i = 1; i < sections.length; i += 2) {
-        const dateStr = sections[i];
-        const entryContent = sections[i + 1];
-        
-        if (dateStr && entryContent) {
-            const date = new Date(dateStr);
-            // Use marked for proper Markdown rendering
-            const processedContent = marked.parse(entryContent.trim());
-            
-            entries.push({
-                date: date,
-                content: processedContent
-            });
-        }
-    }
-    
-    return entries;
-}
-
-function displayTILEntries(entries) {
-    const container = document.getElementById('til-container');
-    
-    if (entries.length === 0) {
-        container.innerHTML = '<p>No TIL entries found.</p>';
-        return;
-    }
-    
-    const entriesHTML = entries.map(entry => {
-        const truncated = entry.content.length > 300 ? entry.content.substring(0, 300) : entry.content;
-
-        return `
-        <div class="til-entry">
-            <div class="til-date">${formatDate(entry.date)}</div>
-            <div class="til-content">
-                <div class="til-short">${truncated}${entry.content.length > 300 ? ' <a href="#" class="til-expand">...</a>' : ''}</div>
-                <div class="til-full" style="display:none">${entry.content} <a href="#" class="til-collapse">Show less</a></div>
-            </div>
-        </div>
-    `}).join('');
-    
-    container.innerHTML = entriesHTML;
-
-    container.querySelectorAll('.til-expand').forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const entryDiv = e.target.closest('.til-entry');
-            entryDiv.querySelector('.til-short').style.display = 'none';
-            entryDiv.querySelector('.til-full').style.display = 'inline';
-        });
-    });
-
-    container.querySelectorAll('.til-collapse').forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const entryDiv = e.target.closest('.til-entry');
-            entryDiv.querySelector('.til-short').style.display = 'inline';
-            entryDiv.querySelector('.til-full').style.display = 'none';
-        });
-    });
-}
-
-// ── Modal for rendering blog posts ──────────────────────────────────────────
-
-async function openPostModal(downloadUrl, title) {
-    const modal   = document.getElementById('post-modal');
-    const content = document.getElementById('post-modal-content');
-
-    content.innerHTML = '<p class="loading">Loading…</p>';
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+    // Switch to post view
+    listView.classList.add('hidden');
+    postView.classList.remove('hidden');
+    postContent.innerHTML = '<p class="status">Loading…</p>';
+    window.scrollTo({ top: 0 });
 
     try {
         const res = await fetch(downloadUrl);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const md = await res.text();
 
-        // Render Markdown
-        content.innerHTML = marked.parse(md);
+        postContent.innerHTML = marked.parse(md);
 
-        // Render LaTeX with KaTeX (auto-render)
         if (window.renderMathInElement) {
-            renderMathInElement(content, {
+            renderMathInElement(postContent, {
                 delimiters: [
                     { left: '$$',  right: '$$',  display: true  },
                     { left: '$',   right: '$',   display: false },
                     { left: '\\(', right: '\\)', display: false },
-                    { left: '\\[', right: '\\]', display: true  }
+                    { left: '\\[', right: '\\]', display: true  },
                 ],
-                throwOnError: false
+                throwOnError: false,
             });
         }
     } catch (err) {
-        content.innerHTML = `<p class="error">Failed to load post: ${err.message}</p>`;
+        postContent.innerHTML = `<p class="error">Failed to load post: ${err.message}</p>`;
     }
 }
 
-function closePostModal() {
-    const modal = document.getElementById('post-modal');
-    modal.classList.add('hidden');
-    document.body.style.overflow = '';
+function closePost() {
+    document.getElementById('blog-post-view').classList.add('hidden');
+    document.getElementById('blog-list-view').classList.remove('hidden');
+    window.scrollTo({ top: 0 });
+}
+//===========================================================================
+
+
+//===========================================================================
+// TIL
+//===========================================================================
+async function fetchTILEntries() {
+    tilLoaded = true;
+    const container = document.getElementById('til-container');
+
+    try {
+        const til = await fetch(`./${TIL_FOLDER_PATH}/til.md`);
+        if (!til.ok) {
+            throw new Error(`Could not find ${TIL_FOLDER_PATH}/${TIL_ENTRY_FILE}`);
+        }
+
+        const content = await til.text();
+
+        renderTIL(parseTIL(content));
+    } catch (err) {
+        container.innerHTML = `<p class="error">Could not load learnings: ${err.message}</p>`;
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('post-modal-close').addEventListener('click', closePostModal);
+function parseTIL(content) {
+    const entries  = [];
+    const sections = content.split(/^## (\d{4}-\d{2}-\d{2})$/gm);
 
-    document.getElementById('post-modal').addEventListener('click', e => {
-        if (e.target === e.currentTarget) closePostModal(); // backdrop click
-    });
+    for (let i = 1; i < sections.length; i += 2) {
+        const dateStr = sections[i];
+        const body    = sections[i + 1];
+        if (dateStr && body) {
+            entries.push({
+                date: new Date(dateStr),
+                html: marked.parse(body.trim()),
+            });
+        }
+    }
+    return entries;
+}
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closePostModal();
+function renderTIL(entries) {
+    const container = document.getElementById('til-container');
+
+    if (!entries.length) {
+        container.innerHTML = '<p class="status">No entries yet.</p>';
+        return;
+    }
+
+    container.innerHTML = entries.map(e => `
+        <div class="til-entry">
+            <span class="til-date">${formatDate(e.date)}</span>
+            <div class="prose til-body">${e.html}</div>
+        </div>
+    `).join('');
+
+    if (window.renderMathInElement) {
+        renderMathInElement(container, {
+            delimiters: [
+                { left: '$$',  right: '$$',  display: true  },
+                { left: '$',   right: '$',   display: false },
+                { left: '\\(', right: '\\)', display: false },
+                { left: '\\[', right: '\\]', display: true  },
+            ],
+            throwOnError: false,
+        });
+    }
+}
+//===========================================================================
+
+
+function formatDate(date) {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric',
     });
-});
+}

@@ -3,97 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exismys' Blog</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Exismys</title>
+    <meta name="description" content="Personal site of Ritesh Patel — physics, math, programming, and more.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
     <!-- marked.js -->
     <script src="https://cdn.jsdelivr.net/npm/marked@13/marked.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Exismys</h1>
-        </header>
+<div class="layout">
 
-        <nav>
-            <span class="nav-link active" data-section="home">Home</span>
-            <span class="nav-link" data-section="blogs">Blog</span>
-            <span class="nav-link" data-section="til">Learnings</span>
-        </nav>
-
-        <section id="home-section" class="content-section">
-            <h2>Hello, my fellow sentient beings!</h2>
-            <div class="home-content">
-                <p>Well, my name is Ritesh Patel. I'm from a small village near Varanasi.</p>
-                <p>My primary interest lies in understanding the nature of existence (although I'm unsure if we can ever...); and so, for how lost I am, I go wandering around exploring:</p>
-                <ul>
-                    <li> Physics/Math</li>
-                    <li> Programming</li>
-                    <li> Chess</li>
-                    <li> Movies and TV shows (I love movies)</li>
-                    <li> Lots of other things</li>
-                </ul>
-<p>Online:</p>
-<ul>
-    <li>
-      <a href="https://github.com/exismys" target="_blank">My GitHub</a>
-    </li>
-    <li>
-      <a href="mailto: riteshzeronity@gmail.com">Email Me</a>
-    </li>
-</ul>
-
-                <h2>Some projects I have worked on:</h2>
-                <ul>
-                    <li> Sorting Algorithm Visualizer: <a href="https://exismyssav.netlify.app/" target="_blank">Live</a> - <a href="https://github.com/exismys/SortingAlgorithmVisualizer" target="_blank">GitHub</a></li>
-                </ul>
-
-                <h2>My favorite books</h2>
-                <ol>
-                    <li> The Three Body Problem (trilogy) by Liu Cixin</li>
-                    <li> Story of Your Life by Ted Chiang</li>
-                    <li> Project Hail Mary by Andy Weir</li>
-                    <li> Ender's Game by Orson S. Card</li>
-                    <li> Recursion by Blake Crouch</li>
-                </ol>
-
-                <h2>My favorite movies</h2>
-                <ol>
-                    <li> Arrival</li>
-                    <li> Contact</li>
-                    <li> Fight Club</li>
-                    <li> And so many others (I have watched too many)</li>
-                </ol>
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="sidebar-brand">
+                <span class="brand-name">Exismys</span>
             </div>
-        </section>
 
-        <section id="blogs-section" class="content-section hidden">
-            <p>My purpose in writing these blogs is not to teach anyone anything. It is to learn things. As people have said, the best way to understand something is to explain it in simple and clear words.</p>
-            <p>So, here I am explaining things to no one, and perhaps I can look back at them as a reference. Feedback is welcome.</p>
-            <h2>Blog Posts</h2>
-            <div id="blog-container">
-                <p class="loading">Loading blog posts...</p>
-            </div>
-        </section>
-
-        <section id="til-section" class="content-section hidden">
-            <h2>Today I Learned</h2>
-            <div id="til-container">
-                <p class="loading">Loading TIL entries...</p>
-            </div>
-        </section>
-
-    <!-- Post reader modal -->
-    <div id="post-modal" class="post-modal hidden">
-        <div class="post-modal-inner">
-            <button id="post-modal-close" aria-label="Close">&times;</button>
-            <article id="post-modal-content" class="post-content"></article>
+            <nav class="sidebar-nav">
+                <a id="nav-home"     class="nav-link active" data-section="home"     href="#home">Home</a>
+                <a id="nav-blog"     class="nav-link"        data-section="blog"     href="#blog">Blog</a>
+                <a id="nav-til"      class="nav-link"        data-section="til"      href="#til">Learnings</a>
+                <a id="nav-lab"      class="nav-link"        data-section="lab"      href="#lab">Lab</a>
+            </nav>
         </div>
-    </div>
 
-    <script src="script.js"></script>
+        <div class="sidebar-links">
+            <a href="https://github.com/exismys" target="_blank" class="sidebar-ext-link">GitHub ↗</a>
+            <a href="mailto:riteshzeronity@gmail.com" class="sidebar-ext-link">Email ↗</a>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <!-- Home -->
+        <section id="home-section" class="section active">
+            <div class="prose">
+                <h1>Hello, my fellow sentient beings!</h1>
+                <p>My primary interest lies in understanding the nature of existence (although I'm unsure if we can ever); and so, for how lost I am, I go wandering around exploring:</p>
+                <ul>
+                    <li>Physics & Math</li>
+                    <li>Computer Science & Programming</li>
+                    <li>Chess</li>
+                    <li>Movies & TV shows (I love movies)</li>
+                    <li>Lots of other things :)</li>
+                </ul>
+
+                <h2>Projects</h2>
+                <ul>
+                    <li>
+                        Sorting Algorithm Visualizer —
+                        <a href="https://exismyssav.netlify.app/" target="_blank">Live</a> ·
+                        <a href="https://github.com/exismys/SortingAlgorithmVisualizer" target="_blank">GitHub</a>
+                    </li>
+                </ul>
+
+                <h2>Favourite Books</h2>
+                <ol>
+                    <li>The Three Body Problem (trilogy) — Liu Cixin</li>
+                    <li>Story of Your Life — Ted Chiang</li>
+                    <li>Project Hail Mary — Andy Weir</li>
+                    <li>Ender's Game — Orson S. Card</li>
+                    <li>Recursion — Blake Crouch</li>
+                </ol>
+
+                <h2>Favourite Movies</h2>
+                <ol>
+                    <li>Arrival</li>
+                    <li>Contact</li>
+                    <li>Fight Club</li>
+                    <li>And so many others (I have watched too many)</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Blog -->
+        <section id="blog-section" class="section">
+            <div id="blog-list-view">
+                <div class="page-header">
+                    <h1>Blog</h1>
+                    <p class="page-desc">I write to learn. The best way to understand something is to explain it clearly.</p>
+                </div>
+                <div id="blog-container"><p class="status">Loading…</p></div>
+            </div>
+
+            <!-- Inline post reader — shown when a post is clicked -->
+            <div id="blog-post-view" class="hidden">
+                <button id="blog-back-btn" class="back-btn">← Back to posts</button>
+                <article id="blog-post-content" class="prose post-prose"></article>
+            </div>
+        </section>
+
+        <!-- Learnings / TIL -->
+        <section id="til-section" class="section">
+            <div class="page-header">
+                <h1>Learnings</h1>
+                <p class="page-desc">Short notes on things I picked up recently.</p>
+            </div>
+            <div id="til-container"><p class="status">Loading…</p></div>
+        </section>
+
+        <!-- Lab -->
+        <section id="lab-section" class="section">
+            <div class="page-header">
+                <h1>Lab</h1>
+                <p class="page-desc">Physics simulations and interactive demos.</p>
+            </div>
+            <div class="lab-empty">
+                <div class="lab-icon">⚗</div>
+                <p>Nothing here yet.</p>
+                <p class="dim">C++ simulations compiled to WebAssembly will live here.</p>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

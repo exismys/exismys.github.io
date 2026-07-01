@@ -1,245 +1,336 @@
+/* ── Reset & System Core ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    /* Warm Dark Canvas (Deep graphite with a drop of amber) */
+    --bg:          #161614;     
+    --bg-code:     #1e1e1b;
+    --border:      #2d2c27;
+    
+    /* Soft Warm Typography (Off-whites to eliminate harsh glare) */
+    --text:        #d4d3c9;     
+    --text-dim:    #8a8880;     
+    --text-head:   #f0eee4;     
+    
+    /* Muted Amber/Gold Accent */
+    --accent:      #caa46a;     
+    --selection:   #34322b;
+    
+    /* Typography Scales */
+    --serif:       'Spectral', Georgia, serif;
+    --sans:        'DM Sans', system-ui, sans-serif;
+    --mono:        'JetBrains Mono', monospace;
+    
+    --max-content: 660px;       
+}
+
+/* ── Base Setup ──────────────────────────────────────────────────────────── */
+html { font-size: 16px; scroll-behavior: smooth; }
+
 body {
-    font-family: monospace;
-    background-color: #000;
-    font-size: 24px;
-    color: #fff;
-    margin: 0;
-    padding: 20px;
-    line-height: 1.5;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
 }
 
-.container {
-    max-width: 800px;
+::selection { background: var(--selection); color: var(--text-head); }
+
+/* ── Centered Column Canvas ──────────────────────────────────────────────── */
+.layout {
+    max-width: var(--max-content);
     margin: 0 auto;
+    padding: 80px 24px 120px 24px; 
 }
 
-h1, h2 {
-    color: #fff;
+/* ── Seamless Header Navigation ──────────────────────────────────────────── */
+.sidebar {
+    width: 100%;
+    position: static;
+    display: block;
+    margin-bottom: 64px;
 }
 
-a {
-    color: #4a9eff;
-    text-decoration: none;
+.sidebar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
 }
 
-a:hover {
-    text-decoration: underline;
+.brand-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-head);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
 }
 
-nav {
-    margin: 20px 0;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
+.brand-sub {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+}
+
+/* Minimal Text Navigation Links */
+.sidebar-nav {
+    display: flex;
+    gap: 20px;
 }
 
 .nav-link {
-    color: #4a9eff;
-    margin-right: 20px;
-    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    font-weight: 400;
+    text-decoration: none;
+    transition: color 0.15s ease;
 }
 
-.nav-link.active {
-    color: #fff;
+.nav-link:hover { color: var(--text-head); }
+.nav-link.active { color: var(--text-head); font-weight: 500; }
+
+/* Subtle social block directly below banner */
+.sidebar-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
 }
 
-.content-section {
-    margin: 20px 0;
+.sidebar-ext-link {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.sidebar-ext-link:hover { color: var(--accent); }
+
+/* ── Content Container ───────────────────────────────────────────────────── */
+.main {
+    margin-left: 0;
+    width: 100%;
 }
 
+/* Sections Transition */
+.section        { display: none; }
+.section.active { display: block; animation: easeIn 0.3s ease-out; }
+
+@keyframes easeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Inner Page Structural Headers */
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-head);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.page-desc {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+}
+
+/* ── Prose & Essay Typography ────────────────────────────────────────────── */
+.prose h1 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-head);
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+
+.prose h2 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-head);
+    margin: 48px 0 16px;
+}
+
+.prose p {
+    margin-bottom: 20px;
+    font-size: 1.02rem;
+    color: var(--text);
+}
+
+.prose ul, .prose ol {
+    margin: 0 0 24px 20px;
+}
+
+.prose li {
+    margin-bottom: 6px;
+}
+
+/* Seamless subtle link underlines */
+.prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+.prose a:hover {
+    text-decoration-color: var(--accent);
+}
+
+/* Code Syntax Minimal blocks */
+.prose code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--bg-code);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #e4e3da;
+    border: 1px solid var(--border);
+}
+
+.prose pre {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 24px 0;
+}
+
+.prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.prose blockquote {
+    border-left: 2px solid var(--text-dim);
+    padding-left: 20px;
+    margin: 28px 0;
+    color: var(--text-dim);
+    font-family: var(--serif);
+    font-style: italic;
+}
+
+/* Clean standard math/data table formatting */
+.prose table {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+.prose th, .prose td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+.prose th {
+    color: var(--text-head);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Dynamic Lists (Blog Feed & TIL Entries) ────────────────────────────── */
 .blog-list {
     list-style: none;
-    padding: 0;
 }
 
 .blog-item {
-    margin: 20px 0;
-    padding: 15px 0;
-    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
 }
 
 .blog-title {
-    color: #fff;
-    font-size: 1.1em;
-    display: block;
-    margin-bottom: 5px;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--text);
+    transition: color 0.15s ease;
 }
-
-.blog-title:hover {
-    color: #4a9eff;
-}
+.blog-item:hover .blog-title { color: var(--accent); }
 
 .blog-meta {
-    color: #888;
-    font-size: 0.9em;
-    margin-bottom: 5px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
 }
 
 .blog-tags {
-    color: #666;
-    font-size: 0.8em;
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
 }
-
 .tag {
-    background-color: #222;
-    color: #ccc;
-    padding: 2px 6px;
-    margin-right: 5px;
-    border: 1px solid #444;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    background: var(--bg-code);
+    color: var(--text-dim);
+    padding: 1px 6px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
 }
 
-.loading, .error {
-    color: #888;
-    text-align: center;
-    padding: 20px;
-}
+.blog-item.is-draft { opacity: 0.3; }
 
-.error {
-    color: #ff4444;
-}
-
-.hidden {
-    display: none;
-}
-
-.home-content p, .home-content p {
-    margin-bottom: 15px;
-}
-
-.til-entry {
-    margin: 30px 0;
-    padding: 20px 0;
-    border-bottom: 1px solid #333;
-}
-
-.til-entry:first-child {
-    margin-top: 0;
-}
-
-.til-date {
-    color: #4a9eff;
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.til-content {
-    line-height: 1.6;
-    margin-left: 20px;
-}
-
-.til-content p {
-    margin-bottom: 10px;
-}
-
-.til-content a {
-    color: #4a9eff;
-    text-decoration: underline;
-}
-
-.til-content code {
-    background-color: #222;
-    color: #ccc;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: monospace;
-}
-
-a.til-expand {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* ── Post reader modal ─────────────────────────────────────────────────────── */
-
-.post-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 1000;
-    overflow-y: auto;
-    padding: 40px 16px;
-    box-sizing: border-box;
-}
-
-.post-modal.hidden {
-    display: none;
-}
-
-.post-modal-inner {
-    position: relative;
-    background: #0d0d0d;
-    border: 1px solid #333;
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 40px 48px;
-    box-sizing: border-box;
-}
-
-#post-modal-close {
-    position: absolute;
-    top: 16px;
-    right: 20px;
+/* Reader Controls */
+.back-btn {
     background: none;
     border: none;
-    color: #888;
-    font-size: 1.8em;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
     cursor: pointer;
-    line-height: 1;
+    margin-bottom: 32px;
+}
+.back-btn:hover { color: var(--text-head); }
+
+/* Today I Learned Stream */
+.til-entry {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+}
+.til-date {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 8px;
 }
 
-#post-modal-close:hover {
-    color: #fff;
+/* ── Empty Lab Space Module ──────────────────────────────────────────────── */
+.lab-empty {
+    text-align: center;
+    padding: 56px 0;
+    color: var(--text-dim);
 }
+.lab-icon { font-size: 1.5rem; margin-bottom: 8px; color: var(--accent); }
+.lab-empty p { font-size: 0.9rem; }
+.dim { font-size: 0.78rem; margin-top: 4px; font-family: var(--mono); }
 
-/* Post content typography */
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-    color: #fff;
-    margin-top: 1.5em;
-}
+.hidden { display: none !important; }
 
-.post-content p {
-    margin-bottom: 1em;
-}
-
-.post-content a {
-    color: #4a9eff;
-}
-
-.post-content code {
-    background: #1a1a1a;
-    color: #ccc;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-family: monospace;
-    font-size: 0.9em;
-}
-
-.post-content pre {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    padding: 16px;
-    overflow-x: auto;
-    border-radius: 4px;
-    margin: 1em 0;
-}
-
-.post-content pre code {
-    background: none;
-    padding: 0;
-    font-size: 0.85em;
-}
-
-.post-content blockquote {
-    border-left: 3px solid #444;
-    margin: 0;
-    padding-left: 1em;
-    color: #999;
-}
-
-/* KaTeX display math centering */
-.post-content .katex-display {
-    overflow-x: auto;
+/* ── Mobile/Responsive Safety ─────────────────────────────────────────────── */
+@media (max-width: 540px) {
+    .layout { padding: 48px 20px; }
+    .sidebar-top { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .sidebar-nav { width: 100%; justify-content: space-between; }
+    .blog-item { flex-direction: column; gap: 4px; }
 }
