@@ -132,9 +132,11 @@ function renderBlogList(blogsMeta) {
             : '';
 
         li.innerHTML = `
-            <span class="blog-title">${meta.title}</span>
-            <div class="blog-meta">${formatDate(meta.date)}</div>
-            ${tagsHTML}
+            <div class="blog-main-info">
+                <span class="blog-title">${meta.title}</span>
+                <span class="blog-meta">${formatDate(meta.date)}</span>
+                ${tagsHTML}
+            </div>
         `;
 
         if (!meta.draft) {

@@ -1,18 +1,18 @@
-/* ── Reset & System Core ─────────────────────────────────────────────────── */
+/* Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    /* Warm Dark Canvas (Deep graphite with a drop of amber) */
+    /* Background (Canvas) */
     --bg:          #161614;     
     --bg-code:     #1e1e1b;
     --border:      #2d2c27;
     
-    /* Soft Warm Typography (Off-whites to eliminate harsh glare) */
+    /* Typography */
     --text:        #d4d3c9;     
     --text-dim:    #8a8880;     
     --text-head:   #f0eee4;     
     
-    /* Muted Amber/Gold Accent */
+    /* Accent */
     --accent:      #caa46a;     
     --selection:   #34322b;
     
@@ -21,10 +21,10 @@
     --sans:        'DM Sans', system-ui, sans-serif;
     --mono:        'JetBrains Mono', monospace;
     
-    --max-content: 660px;       
+    --max-content: 1200px;       
 }
 
-/* ── Base Setup ──────────────────────────────────────────────────────────── */
+/* Base Setup */
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
@@ -37,14 +37,14 @@ body {
 
 ::selection { background: var(--selection); color: var(--text-head); }
 
-/* ── Centered Column Canvas ──────────────────────────────────────────────── */
+/* Centered Canvas */
 .layout {
     max-width: var(--max-content);
     margin: 0 auto;
     padding: 80px 24px 120px 24px; 
 }
 
-/* ── Seamless Header Navigation ──────────────────────────────────────────── */
+/* Header Navigation */
 .sidebar {
     width: 100%;
     position: static;
@@ -76,7 +76,6 @@ body {
     margin-top: 4px;
 }
 
-/* Minimal Text Navigation Links */
 .sidebar-nav {
     display: flex;
     gap: 20px;
@@ -93,7 +92,6 @@ body {
 .nav-link:hover { color: var(--text-head); }
 .nav-link.active { color: var(--text-head); font-weight: 500; }
 
-/* Subtle social block directly below banner */
 .sidebar-links {
     display: flex;
     gap: 16px;
@@ -109,7 +107,7 @@ body {
 }
 .sidebar-ext-link:hover { color: var(--accent); }
 
-/* ── Content Container ───────────────────────────────────────────────────── */
+/* Content Container */
 .main {
     margin-left: 0;
     width: 100%;
@@ -145,7 +143,7 @@ body {
     color: var(--text-dim);
 }
 
-/* ── Prose & Essay Typography ────────────────────────────────────────────── */
+/* Prose & Essay Typography */
 .prose h1 {
     font-family: var(--serif);
     font-size: 2rem;
@@ -177,7 +175,7 @@ body {
     margin-bottom: 6px;
 }
 
-/* Seamless subtle link underlines */
+/* Link underlines */
 .prose a {
     color: var(--accent);
     text-decoration: underline;
@@ -245,15 +243,18 @@ body {
     letter-spacing: 0.05em;
 }
 
-/* ── Dynamic Lists (Blog Feed & TIL Entries) ────────────────────────────── */
+/* Blog Lists and TIL stream */
 .blog-list {
     list-style: none;
 }
 
-.blog-item {
+.blog-main-info {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.blog-item {
+    display: block;
     padding: 14px 0;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
@@ -302,7 +303,7 @@ body {
 }
 .back-btn:hover { color: var(--text-head); }
 
-/* Today I Learned Stream */
+/* TIL Stream */
 .til-entry {
     padding: 28px 0;
     border-bottom: 1px solid var(--border);
@@ -315,7 +316,7 @@ body {
     margin-bottom: 8px;
 }
 
-/* ── Empty Lab Space Module ──────────────────────────────────────────────── */
+/* Lab */
 .lab-empty {
     text-align: center;
     padding: 56px 0;
@@ -327,7 +328,7 @@ body {
 
 .hidden { display: none !important; }
 
-/* ── Mobile/Responsive Safety ─────────────────────────────────────────────── */
+/* Mobile/Responsive Safety */
 @media (max-width: 540px) {
     .layout { padding: 48px 20px; }
     .sidebar-top { flex-direction: column; gap: 20px; align-items: flex-start; }
