@@ -173,6 +173,10 @@ async function openPost(downloadUrl) {
 
         postContent.innerHTML = marked.parse(md);
 
+        postContent.querySelectorAll("pre code").forEach(block => {
+            hljs.highlightElement(block);
+        });
+
         if (window.renderMathInElement) {
             renderMathInElement(postContent, {
                 delimiters: [
