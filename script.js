@@ -59,23 +59,31 @@ async function fetchBlogList() {
 
         const files = await blogIndex.json();
 
-        const blogsMeta = await Promise.all(
-            files.map(async fileName => {
-                const relativeUrl = `./${BLOG_FOLDER_PATH}/${fileName}`;
-                try {
-                    const content = await (await fetch(relativeUrl)).text();
-                    return parseMeta(fileName, content, relativeUrl);
-                } catch {
-                    return {
-                        title: fileName, date: new Date(), tags: [],
-                        draft: false, downloadUrl: relativeUrl
-                    };
-                }
-            })
+        const pinnedFiles = files.pinned || [];
+        const normalFiles = files.posts || data;
+
+        const loadMeta = async (fileName) => {
+            const relativeUrl = `./${BLOG_FOLDER_PATH}/${fileName}`;
+            try {
+                const content = await (await fetch(relativeUrl)).text();
+                return parseMeta(fileName, content, relativeUrl);
+            } catch {
+                return {
+                    title: fileName, date: new Date(), tags: [],
+                    draft: false, downloadUrl: relativeUrl
+                };
+            }
+        };
+
+        const [pinnedMeta, blogsMeta] = await Promise.all(
+            [
+                Promise.all(pinnedFiles.map(loadMeta)),
+                Promise.all(normalFiles.map(loadMeta))
+            ]
         );
 
         blogsMeta.sort((a, b) => b.date - a.date);
-        renderBlogList(blogsMeta);
+        renderBlogList(blogsMeta, pinnedMeta);
     } catch (err) {
         container.innerHTML = `<p class="error">Could not load posts: ${err.message}</p>`;
     }
@@ -112,20 +120,18 @@ function parseMeta(fileName, content, relativeUrl) {
     return { title, date, tags, draft, downloadUrl: relativeUrl };
 }
 
-function renderBlogList(blogsMeta) {
+function renderBlogList(blogsMeta, pinnedMeta = []) {
     const container = document.getElementById('blog-container');
+    container.innerHTML = '';
 
-    if (!blogsMeta.length) {
+    if (!blogsMeta.length && !pinnedMeta.length) {
         container.innerHTML = '<p class="status">No posts yet.</p>';
         return;
     }
 
-    const ul = document.createElement('ul');
-    ul.className = 'blog-list';
-
-    blogsMeta.forEach(meta => {
+    const createPostListItem = (meta, isPinnedItem = false) => {
         const li = document.createElement('li');
-        li.className = `blog-item${meta.draft ? ' is-draft' : ''}`;
+        li.className = `blog-item${meta.draft ? ' is-draft' : ''}${isPinnedItem ? ' is-pinned' : ''}`;
 
         const tagsHTML = meta.tags.length
             ? `<div class="blog-tags">${meta.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
@@ -143,11 +149,44 @@ function renderBlogList(blogsMeta) {
             li.addEventListener('click', () => openPost(meta.downloadUrl));
         }
 
-        ul.appendChild(li);
-    });
+        return li;
+    };
 
-    container.innerHTML = '';
-    container.appendChild(ul);
+    // Build pinned section if items exist
+    if (pinnedMeta.length) {
+        const pinnedSection = document.createElement('div');
+        pinnedSection.className = 'blog-pinned-wrapper';
+        
+        const label = document.createElement('div');
+        label.className = 'blog-section-label';
+        label.innerText = 'Featured Writing';
+        pinnedSection.appendChild(label);
+
+        const ul = document.createElement('ul');
+        ul.className = 'blog-list';
+        pinnedMeta.forEach(meta => ul.appendChild(createPostListItem(meta, true)));
+        
+        pinnedSection.appendChild(ul);
+        container.appendChild(pinnedSection);
+    }
+
+    // Build chronological feed section
+    const feedSection = document.createElement('div');
+    feedSection.className = 'blog-feed-wrapper';
+
+    if (pinnedMeta.length) {
+        const label = document.createElement('div');
+        label.className = 'blog-section-label';
+        label.innerText = 'All Entries';
+        feedSection.appendChild(label);
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'blog-list';
+    blogsMeta.forEach(meta => ul.appendChild(createPostListItem(meta, false)));
+    feedSection.appendChild(ul);
+
+    container.appendChild(feedSection);
 }
 //===========================================================================
 
@@ -269,8 +308,12 @@ function renderTIL(entries) {
 //===========================================================================
 
 
+//===========================================================================
+// Utility functions
+//===========================================================================
 function formatDate(date) {
     return date.toLocaleDateString('en-US', {
         year: 'numeric', month: 'long', day: 'numeric',
     });
 }
+//===========================================================================
