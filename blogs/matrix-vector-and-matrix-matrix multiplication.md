@@ -4,20 +4,26 @@
 **tags:** `math`
 **status:** `draft`
 
+
+When we think of multiplication in general, we think of it as something that scales something "original". For example, multiplying a number $2$ with another number $x$ means that we double the number $x$ or increase $2$ by $x$ times.
+
 ## Matrix-Vector Multiplication ($ A \mathbf{v} $)
 
-A Matrix $ A \in \mathbb{R}^{m \times n} $ in general can be thought of as a linear transformation from $ \mathbb{R}^n $ to $ \mathbb{R}^m $.
+Now, consider matrix-vector multiplication $A\mathbf{v}$,
+$$
+\begin{bmatrix}
+a_1 & a_2 \\
+b_1 & b_2
+\end{bmatrix}
 
-Terminologies:
-- $ \mathbb{R} $ : the set of real numbers.
-- $ \mathbb{R}^n $ : the space of all n-dimensional vectors whose components are real numbers.
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+$$
 
-**What do we mean transformation and more specifically linear transformation?**
+Here, $\mathbf{v}$ can be thought of as vector in component form: $\mathbf{x\hat{i}+y\hat{j}}$.
 
-Transformation can be thought of as a function which takes a vector as an input and outputs another vector.
+Matrix $A$ on the other hand, is just a set of numbers arranged in $m$ rows and $n$ coloumns $(m \times n)$. In this specific case, we have $(m \times n) = (2, 2)$.
 
-Specifically, a linear transformation transforms a vector space without "bending" any of vectors in it.
-
-## Matrix-Matrix Multiplication
-
-$ A \in \mathbb{R}^{m \times n}, \quad \mathbf{v} \in \mathbb{R}^n$
+The matrix currently seems meaningless unless we give it some meaning.

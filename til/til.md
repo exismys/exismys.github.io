@@ -1,4 +1,13 @@
-## 2026-07-01
+## 2026-07-05
+**Back Face Culling** allows us to categorize triangles constituting an object into **front facing triangles** (visible to camera) and **back facing triangles** (not visible to the camera, covered by front facing triangles).
+
+We determine this by checking if the **dot product** of outward normal of a triangle (constituting a closed body) and view vector (from normal's tail to camera) is +ve (front facing) or -ve (back facing).
+
+We find out the normal by doing a **cross product** of two of the triangles' side which are tail-to-tail. For example, in a triangle ABC, we get the sides in vector form as AB (by B - A) and AC ( by C - A). Doing a cross product of AB and AC results in a vector perpendicular to both (normal). 
+
+We need to stick to a particular winding order of triangles' vertices to that the resultant normal points in the outward direction.
+
+# 2026-07-01
 I have not updated this website in last 3 months. I have been doing (on and off) a lot of stuff related to 3D software rendering that I am gonna list:
 
 - **Ray Tracing:** I learnt about Ray Tracing and it was the coolest thing ever because it was so close to several domains like maths and physics. We are literally tracing around a million of rays to find their intersections with the objects in the scene and painting their respective color accordingly. I also got around to implement lightning (point, directional, ambient), reflections (diffuse & specular), recursive mirror reflection (one of the coolest stuff in ray tracing). I learnt how we can render physics accurate scenes (although they require high compute).
