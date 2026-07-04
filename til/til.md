@@ -7,7 +7,7 @@ We find out the normal by doing a **cross product** of two of the triangles' sid
 
 We need to stick to a particular winding order of triangles' vertices to that the resultant normal points in the outward direction.
 
-# 2026-07-01
+## 2026-07-01
 I have not updated this website in last 3 months. I have been doing (on and off) a lot of stuff related to 3D software rendering that I am gonna list:
 
 - **Ray Tracing:** I learnt about Ray Tracing and it was the coolest thing ever because it was so close to several domains like maths and physics. We are literally tracing around a million of rays to find their intersections with the objects in the scene and painting their respective color accordingly. I also got around to implement lightning (point, directional, ambient), reflections (diffuse & specular), recursive mirror reflection (one of the coolest stuff in ray tracing). I learnt how we can render physics accurate scenes (although they require high compute).

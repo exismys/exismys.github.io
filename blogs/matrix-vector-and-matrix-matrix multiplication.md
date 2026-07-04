@@ -26,4 +26,4 @@ Here, $\mathbf{v}$ can be thought of as vector in component form: $\mathbf{x\hat
 
 Matrix $A$ on the other hand, is just a set of numbers arranged in $m$ rows and $n$ coloumns $(m \times n)$. In this specific case, we have $(m \times n) = (2, 2)$.
 
-The matrix currently seems meaningless unless we give it some meaning.
+The matrix currently seems meaningless unless we give it some meaning. Vectors in contrast, have meaning, i.e., they represent a point in space.
