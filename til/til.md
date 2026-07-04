@@ -60,7 +60,7 @@ Of course, I had to modify `.gitignore` after to ignore all `.vscode` except tha
 **Sine Wave Sampling:** Wrote a blog about producing sounds programmatically. More info here: [sine wave sampling](https://github.com/exismys/Blog/blob/main/blogs/2025-09-07-sine-wave-sampling.md)
 
 ## 2025-09-06
-**Latex Rendering in Markdown:** I learnt how to sprinkle latex code in markdown for stuff like math equations. We can wrap latex between $$ for inline and $$$$ for multiline. My first use here: [sine wave sampling](https://github.com/exismys/Blog/blob/main/blogs/2025-09-07-sine-wave-sampling.md)
+**Latex Rendering in Markdown:** I learnt how to sprinkle latex code in markdown for stuff like math equations. We can wrap latex between `$`...`$` for inline and `$$`...`$$` for multiline. My first use here: [sine wave sampling](https://github.com/exismys/Blog/blob/main/blogs/2025-09-07-sine-wave-sampling.md)
 
 ## 2025-09-03
 **Matrices as Linear Transformation:** of vector space. Every matrix represents a linear transformation. A matrix $A$ takes a vector $\mathbf{v}$ as an input and transforms into a vector $\mathbf{v'}$. I am thinking of writing a blog on this.
