@@ -359,6 +359,16 @@ body {
 
 .hidden { display: none !important; }
 
+/* Katex */
+.katex {
+    font-size: 1.15em;
+}
+
+.katex-display {
+    font-size: 1.4em;
+    margin: 1.25em 0;
+}
+
 /* Mobile/Responsive Safety */
 @media (max-width: 540px) {
     .layout { padding: 48px 20px; }

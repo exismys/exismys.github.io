@@ -5,6 +5,25 @@ const TIL_FOLDER_PATH  = 'til';
 const TIL_ENTRY_FILE = `til.md`
 
 //===========================================================================
+// Setup markdown parser
+//===========================================================================
+const mdParser = window.markdownit({
+    html: true,
+    linkify: true,
+    typographer: true
+});
+
+mdParser.use(texmath, {
+    engine: katex,
+    delimiters: "dollars",
+    katexOptions: {
+        throwOnError: false
+    }
+});
+//===========================================================================
+
+
+//===========================================================================
 // Navigation
 //===========================================================================
 let blogsLoaded = false;
@@ -210,23 +229,11 @@ async function openPost(downloadUrl) {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const md = await res.text();
 
-        postContent.innerHTML = marked.parse(md);
+        postContent.innerHTML = mdParser.render(md);
 
         postContent.querySelectorAll("pre code").forEach(block => {
             hljs.highlightElement(block);
         });
-
-        if (window.renderMathInElement) {
-            renderMathInElement(postContent, {
-                delimiters: [
-                    { left: '$$',  right: '$$',  display: true  },
-                    { left: '$',   right: '$',   display: false },
-                    { left: '\\(', right: '\\)', display: false },
-                    { left: '\\[', right: '\\]', display: true  },
-                ],
-                throwOnError: false,
-            });
-        }
     } catch (err) {
         postContent.innerHTML = `<p class="error">Failed to load post: ${err.message}</p>`;
     }

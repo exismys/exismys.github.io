@@ -107,7 +107,7 @@ int playNote(double frequency, double duration) {
 
 **graph: sine wave sampled at 44.1 kHz**
 
-![Sine Wave Sampled](/assets/images/sine-wave-sampled)
+![Sine Wave Sampled](/assets/images/sine-wave-sampled.png)
 
 And there we have, a somewhat repeating/oscillating values for 88,200 points, and so what our ear detects is the speed of oscillation and the sound we hear is interpretation of that motion.
 

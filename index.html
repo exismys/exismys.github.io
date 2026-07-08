@@ -16,11 +16,13 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 
     <!-- marked.js for parsing markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@13/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/markdown-it@14.3.0/dist/markdown-it.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/markdown-it-texmath@1.0.0/texmath.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markdown-it-texmath@1.0.0/css/texmath.min.css">
 
     <!-- highlight.js for syntax highlighting of code blocks --> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/github-dark.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"></script>
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -132,6 +134,6 @@
     </main>
 </div>
 
-<script src="script.js"></script>
+<script defer src="script.js"></script>
 </body>
 </html>
