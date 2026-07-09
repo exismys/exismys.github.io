@@ -278,7 +278,7 @@ function parseTIL(content) {
         if (dateStr && body) {
             entries.push({
                 date: new Date(dateStr),
-                html: marked.parse(body.trim()),
+                html: mdParser.render(body.trim()),
             });
         }
     }
@@ -299,18 +299,6 @@ function renderTIL(entries) {
             <div class="prose til-body">${e.html}</div>
         </div>
     `).join('');
-
-    if (window.renderMathInElement) {
-        renderMathInElement(container, {
-            delimiters: [
-                { left: '$$',  right: '$$',  display: true  },
-                { left: '$',   right: '$',   display: false },
-                { left: '\\(', right: '\\)', display: false },
-                { left: '\\[', right: '\\]', display: true  },
-            ],
-            throwOnError: false,
-        });
-    }
 }
 //===========================================================================
 
