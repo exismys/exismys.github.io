@@ -1,3 +1,12 @@
+## 2026-07-09
+In last two days, 
+
+I have written a blog on geometric interpretation of matrix-vector and matrix-matrix multiplication: [geometric interpretation of matrices](/index.html#blog?post=2026-07-09-matrix-vector-and-matrix-matrix%20multiplication.md)
+
+Studied various **shading** techniques (flat, gouraud, and phong). Only implemented flat for now. The goal is to move on as soon as possible to physics simulation and not stuck in minor visual improvements. **Flat shading** is a technique where we calculate calculate the lightning at the center of a triangle and use the same throughout all the points on triangle.
+
+On how to compute the lighting itself (with triangle normals and light direction), I am very soon going to write a blog on the topic or scribbles :)
+
 ## 2026-07-05
 **Back Face Culling** allows us to categorize triangles constituting an object into **front facing triangles** (visible to camera) and **back facing triangles** (not visible to the camera, covered by front facing triangles).
 
