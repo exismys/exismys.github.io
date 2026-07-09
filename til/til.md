@@ -1,9 +1,9 @@
 ## 2026-07-09
-In last two days, 
+In last 2-3 days, 
 
 I have written a blog on geometric interpretation of matrix-vector and matrix-matrix multiplication: [geometric interpretation of matrices](/index.html#blog?post=2026-07-09-matrix-vector-and-matrix-matrix%20multiplication.md)
 
-Studied various **shading** techniques (flat, gouraud, and phong). Only implemented flat for now. The goal is to move on as soon as possible to physics simulation and not stuck in minor visual improvements. **Flat shading** is a technique where we calculate calculate the lightning at the center of a triangle and use the same throughout all the points on triangle.
+Studied various **shading** techniques (flat, gouraud, and phong). Only implemented flat for now. The goal is to move on as soon as possible to physics simulations and not get stuck in minor visual improvements. **Flat shading** is a technique where we calculate the the effect of lighting at the center of a triangle and use the same for all the points of the triangle.
 
 On how to compute the lighting itself (with triangle normals and light direction), I am very soon going to write a blog on the topic or scribbles :)
 
@@ -50,7 +50,7 @@ It makes sense to have **Potential energy reference height** (often set to 0), a
 Greater the result, greater the alignment. if they are perpendicular (cos of angle is 0), no alignment. If -ve, negative alignment, i.e. the component of one in the direction of other is negative.
 
 ## 2025-09-14
-**Geometric interpretation of inverse matrix A^-1:** In essence, it's a transformation applied on a transformed vector *V'* (by matrix *A*), so that V' transforms to original *V*. No transformation at all (A^-1 A).
+**Geometric interpretation of inverse matrix ($A^{-1}$):** In essence, it's a transformation applied on a transformed vector $\mathbf{V'}$ (by matrix $A$), so that $\mathbf{V'}$ transforms to original $\mathbf{V}$. No transformation at all $(A^{-1} A)$.
 
 ## 2025-09-08
 **Overloading [] operator in C++:** two varients, `double& operator[](int i);` and `double operator[](int i) const;`. First one returns a reference to actual data member to which we can assign some value. Second one only works when called on a const object and returns just a value. Makes sense, can't assign a value to a value.
@@ -66,10 +66,10 @@ Of course, I had to modify `.gitignore` after to ignore all `.vscode` except tha
 ## 2025-09-07
 **URL Hash based routing:** This is actually very interesting, saves you load time switching between pages.
 
-**Sine Wave Sampling:** Wrote a blog about producing sounds programmatically. More info here: [sine wave sampling](https://github.com/exismys/Blog/blob/main/blogs/2025-09-07-sine-wave-sampling.md)
+**Sine Wave Sampling:** Wrote a blog about producing sounds programmatically. More info here: [sine wave sampling](/index.html#blog?post=2025-09-07-sine-wave-sampling.md)
 
 ## 2025-09-06
-**Latex Rendering in Markdown:** I learnt how to sprinkle latex code in markdown for stuff like math equations. We can wrap latex between `$`...`$` for inline and `$$`...`$$` for multiline. My first use here: [sine wave sampling](https://github.com/exismys/Blog/blob/main/blogs/2025-09-07-sine-wave-sampling.md)
+**Latex Rendering in Markdown:** I learnt how to sprinkle latex code in markdown for stuff like math equations. We can wrap latex between `$`...`$` for inline and `$$`...`$$` for multiline. My first use here: [sine wave sampling](/index.html#blog?post=2025-09-07-sine-wave-sampling.md)
 
 ## 2025-09-03
 **Matrices as Linear Transformation:** of vector space. Every matrix represents a linear transformation. A matrix $A$ takes a vector $\mathbf{v}$ as an input and transforms into a vector $\mathbf{v'}$. I am thinking of writing a blog on this.
