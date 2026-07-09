@@ -369,6 +369,22 @@ body {
     margin: 1.25em 0;
 }
 
+/* Image grid for featured section */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.image-grid img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
 /* Mobile/Responsive Safety */
 @media (max-width: 540px) {
     .layout { padding: 48px 20px; }
