@@ -33,12 +33,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
 
-    function showSection(name) {
+    // Parse the current hash into a section name and a post file query
+    function parseHash() {
+        const hash = window.location.hash.slice(1) || 'home';
+        const [section, queryStr] = hash.split('?');
+        
+        let postFile = null;
+        if (queryStr) {
+            const urlParams = new URLSearchParams(queryStr);
+            postFile = urlParams.get('post');
+        }
+        
+        return { section, postFile };
+    }
+
+    function showSection(name, postFile = null) {
         navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === name));
         sections.forEach(s => s.classList.toggle('active', s.id === `${name}-section`));
 
-        if (name === 'blog' && !blogsLoaded) fetchBlogList();
+        if (name === 'blog') {
+            if (postFile) {
+                openPost(`./${BLOG_FOLDER_PATH}/${postFile}`);
+            } else {
+                closePost();
+                if (!blogsLoaded) fetchBlogList();
+            }
+        }
+
         if (name === 'til'  && !tilLoaded)   fetchTILEntries();
+    }
+
+    // Dynamic router
+    function handleRouting() {
+        const { section, postFile } = parseHash();
+        showSection(section, postFile);
     }
 
     navLinks.forEach(link => {
@@ -46,19 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const target = link.dataset.section;
             history.pushState(null, '', `#${target}`);
-            showSection(target);
+            handleRouting();
         });
     });
 
-    window.addEventListener('popstate', () => {
-        showSection(window.location.hash.slice(1) || 'home');
-    });
+    window.addEventListener('popstate', handleRouting);
 
     // Back button in post reader
-    document.getElementById('blog-back-btn').addEventListener('click', closePost);
+    document.getElementById('blog-back-btn').addEventListener('click', () => {
+        history.pushState(null, '', '#blog');
+        handleRouting();
+    });
 
-    const initial = window.location.hash.slice(1) || 'home';
-    showSection(initial);
+    // Run on initial page load
+    handleRouting();
 });
 //===========================================================================
 
@@ -85,7 +114,7 @@ async function fetchBlogList() {
             const relativeUrl = `./${BLOG_FOLDER_PATH}/${fileName}`;
             try {
                 const content = await (await fetch(relativeUrl)).text();
-                return parseMeta(fileName, content, relativeUrl);
+                return {...parseMeta(fileName, content, relativeUrl), fileName};
             } catch {
                 return {
                     title: fileName, date: new Date(), tags: [],
@@ -165,7 +194,11 @@ function renderBlogList(blogsMeta, pinnedMeta = []) {
         `;
 
         if (!meta.draft) {
-            li.addEventListener('click', () => openPost(meta.downloadUrl));
+            li.addEventListener('click', () => {
+                history.pushState(null, '', `#blog?post=${encodeURIComponent(meta.fileName)}`);
+                // Force router run
+                window.dispatchEvent(new Event('popstate'));
+            });
         }
 
         return li;
@@ -242,7 +275,6 @@ async function openPost(downloadUrl) {
 function closePost() {
     document.getElementById('blog-post-view').classList.add('hidden');
     document.getElementById('blog-list-view').classList.remove('hidden');
-    window.scrollTo({ top: 0 });
 }
 //===========================================================================
 
