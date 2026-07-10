@@ -269,11 +269,11 @@ body {
 }
 
 .blog-item.is-pinned .blog-title::after {
-    content: " ✦";
-    font-size: 0.85rem;
+    content: "📌";
+    font-size: 0.75rem;
     color: var(--accent);
     vertical-align: middle;
-    margin-left: 4px;
+    margin-left: 8px;
 }
 
 .blog-list {
