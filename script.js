@@ -86,6 +86,42 @@ document.addEventListener('DOMContentLoaded', () => {
         handleRouting();
     });
 
+
+    // Open & close model when an image is clicked
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector(".lightbox-close");
+    const gridImages = document.querySelectorAll(".image-grid img");
+
+    gridImages.forEach(img => {
+        img.addEventListener("click", () => {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+    });
+
+    const closeLightbox = () => {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "";
+        setTimeout(() => { lightboxImg.src = ""; }, 300); 
+    };
+
+    closeBtn.addEventListener("click", closeLightbox);
+    
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("active")) {
+            closeLightbox();
+        }
+    });
+
     // Run on initial page load
     handleRouting();
 });
