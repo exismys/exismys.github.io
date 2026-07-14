@@ -1,3 +1,12 @@
+## 2026-07-14
+I have not been able to write this update because of the recent trip planning and stuff. So, mainly on July 11th and 12th, I worked on sphere rasterization (low poly style) to use them as general objects like stars and planets in three body simulation :)
+
+On a high level, we sweep from north pole to south pole (0 to π) to get a whole latitude line, and for each iteration step of that latitude line, we sweep through (0 to 2π) to get the longitude lines.
+
+Also implemented a kind of bridge between my simulation state (physics) and rendering so that they can each remain seperate and not get intertwined with each other. Simulation module now determines the number of objects and their type, and their physical state, and rasterization module handles the rendering.
+
+I am currently on a trip, so won't be able to do much on the coding part but hopefully will be doing some reading.
+
 ## 2026-07-09
 In last 2-3 days, 
 
