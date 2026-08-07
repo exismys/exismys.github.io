@@ -1,3 +1,6 @@
+## 2026-08-07
+**The effect of Earth's rotation on free-fall acceleration:** well, the gravitation acceleration ($g$) that we have studied and applied thoughout our high school is different from free-fall acceleration. In practice, we treat them the same and use $g$ naturally throughout but the actual acceleration experience by an object is different from the gravitation acceleration ($g$) because of centrifugal effect caused by Earth's rotation. The actual acceleration is little less than the gravitational acceleration, counteracted by the centrifugal force experience by an object as it's rotation with the Earth.
+
 ## 2026-07-14
 I have not been able to write this update because of the recent trip planning and stuff. So, mainly on July 11th and 12th, I worked on sphere rasterization (low poly style) to use them as general objects like stars and planets in three body simulation :)
 
