@@ -1,5 +1,27 @@
+## 2026-08-23
+
+Quite a few updates:
+
+**Conic Sections & Whispering Galleries:** Covered the equations of circles, parabolas, & ellipses. One very amusing thing about parabolas and ellipses is their reflection property. Well, parabolas are practically very useful and they have many applications in sciences and in our daily lives, for example search lights, radio telescopes, etc, but what I really want to talk about is ellipses. This reflection property of ellipses is used in the construction of something very amusing that we call whispering galleries. They are ellipsoidal rooms with two foci (as the requirement of being an ellipse, except a circle). If a person stands at one of the foci and whispers, another person standing at the other focus can hear it but anyone standing in between those two people can't. This happens because sound waves originating from one of the foci get reflected off the walls and ceilings of the room and arrive together at the other focus.
+
+Found a video demonstrating this (so cool :0) from 7 years ago: [Whispering Gallery, Museum of Science and Industry, Chicago](https://www.youtube.com/watch?v=ausKK9aMz0o)
+
+**Halley's Comet & eccentricity of an ellipse:** A blog I wrote on Halley's Comet orbit. Please read here:  [Halley's Comet & Eccentricity of Ellipses: A Thing about Meeting a Distant Forlorn Friend](/index.html#blog?post=2026-08-23-halleys-comet-and-eccentricity-of-an-ellipse.md)
+
+**Fluids:** 
+
+**Three-Body Problem Simulation:** Created a simple (rough) simulation of Three-Body Problem using my own 3D software renderer and uploaded it as a video on YouTube :)
+<div style="position: relative; width: 100%; padding-bottom: 56.25%;">
+    <iframe
+        src="https://www.youtube.com/embed/vxJKq9hLrig"
+        title="Three-Body Problem Simulation"
+        style="position: absolute; width: 100%; height: 100%; border: 0;"
+        allowfullscreen>
+    </iframe>
+</div>
+
 ## 2026-08-07
-**The effect of Earth's rotation on free-fall acceleration:** well, the gravitation acceleration ($g$) that we have studied and applied thoughout our high school is different from free-fall acceleration. In practice, we treat them the same and use $g$ naturally throughout but the actual acceleration experience by an object is different from the gravitation acceleration ($g$) because of centrifugal effect caused by Earth's rotation. The actual acceleration is little less than the gravitational acceleration, counteracted by the centrifugal force experience by an object as it's rotation with the Earth.
+**The effect of Earth's rotation on free-fall acceleration:** well, the gravitation acceleration ($g$) that we have studied and applied thoughout our high school is different from free-fall acceleration. In practice, we treat them the same and use $g$ naturally throughout but the actual acceleration experience by an object is different from the gravitation acceleration ($g$) because of centrifugal effect caused by Earth's rotation. The actual acceleration is little less than the gravitational acceleration, counteracted by the centrifugal force experience by an object as it's rotating with the Earth.
 
 ## 2026-07-14
 I have not been able to write this update because of the recent trip planning and stuff. So, mainly on July 11th and 12th, I worked on sphere rasterization (low poly style) to use them as general objects like stars and planets in three body simulation :)
