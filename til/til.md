@@ -8,8 +8,6 @@ Found a video demonstrating this (so cool :0) from 7 years ago: [Whispering Gall
 
 **Halley's Comet & eccentricity of an ellipse:** A blog I wrote on Halley's Comet orbit. Please read here:  [Halley's Comet & Eccentricity of Ellipses: A Thing about Meeting a Distant Forlorn Friend](/index.html#blog?post=2026-08-23-halleys-comet-and-eccentricity-of-an-ellipse.md)
 
-**Fluids:** 
-
 **Three-Body Problem Simulation:** Created a simple (rough) simulation of Three-Body Problem using my own 3D software renderer and uploaded it as a video on YouTube :)
 <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
     <iframe
@@ -18,7 +16,13 @@ Found a video demonstrating this (so cool :0) from 7 years ago: [Whispering Gall
         style="position: absolute; width: 100%; height: 100%; border: 0;"
         allowfullscreen>
     </iframe>
-</div>
+</div><br>
+
+**Fluids:** An object floats on water only if the mass of water it replaces is equal to it's own mass. Did some scribbling about it...
+
+![Condition for floating](/assets/images/condition-for-floating.png)
+
+
 
 ## 2026-08-07
 **The effect of Earth's rotation on free-fall acceleration:** well, the gravitation acceleration ($g$) that we have studied and applied thoughout our high school is different from free-fall acceleration. In practice, we treat them the same and use $g$ naturally throughout but the actual acceleration experience by an object is different from the gravitation acceleration ($g$) because of centrifugal effect caused by Earth's rotation. The actual acceleration is little less than the gravitational acceleration, counteracted by the centrifugal force experience by an object as it's rotating with the Earth.
