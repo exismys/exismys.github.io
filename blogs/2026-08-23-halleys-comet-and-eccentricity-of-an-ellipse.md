@@ -1,6 +1,6 @@
 # Halley's Comet & Eccentricity of Ellipses: A Thing about Meeting a Distant Forlorn Friend
 
-**date:** `2026-08-23` `03:00` `UTC+5:30`  
+**date:** `2026-08-23` `22:00` `UTC+5:30`  
 **tags:** `math` `physics` `astronomy`
 
 

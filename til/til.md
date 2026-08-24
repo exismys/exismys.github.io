@@ -1,5 +1,17 @@
-## 2026-08-23
+## 2026-08-24
+Continuing with the updates (this includes stuff I have been doing since Aug 7),
 
+**Oscillation & Waves I:** I have gone through these two chapters also. Here are some interesting stuff:
+
+***Relationship between Uniform Circular Motion & Simple Harmonic Motion:*** Oscillations are these recurring back and forth motion (at equal intervals) about some point called the equilibrium point. If an object is oscillating a particular point, an obvious conclusion is that there must be some sort of force pulling on object toward the equilibrium point. So, the motion can visualized by imagining an object on x-axis at $x = -1$ which is the farthest the object can go in the left direction from the equilibrium point $x = 0$. Assuming that there is some sort of force acting toward that equilibrium point, the object starts to move right and gains velocity (as $a \neq 0$). The moment object moves past the origin, the direction of the force inverts and causes it to deccelarate and momentarily stop at $x = 1$ (farthest right) and eventually reverses its motion to the left. The highest displacement from the equilibrium is called Amplitude. And so it goes on and on... Now, there might be various kinds of oscillating motion. One of those is **Simple Harmonic Motion (SHM)** which is when the force acting on the object is directly proportional to its displacement from the equilibrium point. It has the form:
+$$F = -kx$$
+It turns out that there is a special relationship between uniform circular motion and SHM; it's that if you track the former, you derive the later.
+
+Consider a point $P$ revolving around a point $O$ at $x = 0$ with some velocity $\mathbf{v}$ so that its path traces a circle of radius $1$. We can use the radius joining $P$ and $O$ as the amplitude. The projection of the radius as $P$ revolves around $O$ represents SHM. We can notice when the $P$ is at $(1, 0)$, it's at its highest displacement from equilibrium point. The x-projection of $\mathbf{v}$ represents the velocity of the SHM, and the x-projection of acceleration (which is directed radially) represents the accelaration of SHM.
+
+***Speed of waves in a medium:*** Speed of a wave propagating through a material is completely determined by the mechanical properties of that medium. Let's do a thought experiment... When we swing a string back and forth, our intuition might lead us to believe that swinging it faster might increase the speed at which the wave produced propogate through it. Contrary to that intuition, the moment we choose that rope, the speed is fixed. As we swing faster or lower, the frequency and wavelength gets adjusted instead.
+
+## 2026-08-23
 Quite a few updates:
 
 **Conic Sections & Whispering Galleries:** Covered the equations of circles, parabolas, & ellipses. One very amusing thing about parabolas and ellipses is their reflection property. Well, parabolas are practically very useful and they have many applications in sciences and in our daily lives, for example search lights, radio telescopes, etc, but what I really want to talk about is ellipses. This reflection property of ellipses is used in the construction of something very amusing that we call whispering galleries. They are ellipsoidal rooms with two foci (as the requirement of being an ellipse, except a circle). If a person stands at one of the foci and whispers, another person standing at the other focus can hear it but anyone standing in between those two people can't. This happens because sound waves originating from one of the foci get reflected off the walls and ceilings of the room and arrive together at the other focus.
@@ -21,8 +33,6 @@ Found a video demonstrating this (so cool :0) from 7 years ago: [Whispering Gall
 **Fluids:** An object floats on water only if the mass of water it replaces is equal to it's own mass. Did some scribbling about it...
 
 ![Condition for floating](/assets/images/condition-for-floating.png)
-
-
 
 ## 2026-08-07
 **The effect of Earth's rotation on free-fall acceleration:** well, the gravitation acceleration ($g$) that we have studied and applied thoughout our high school is different from free-fall acceleration. In practice, we treat them the same and use $g$ naturally throughout but the actual acceleration experience by an object is different from the gravitation acceleration ($g$) because of centrifugal effect caused by Earth's rotation. The actual acceleration is little less than the gravitational acceleration, counteracted by the centrifugal force experience by an object as it's rotating with the Earth.
@@ -75,7 +85,7 @@ It makes sense to have **Potential energy reference height** (often set to 0), a
 **Shaders:** I heard about shaders a lot. They seemed some esoteric concepts. I started learning OpenGl and it turns out they are just tiny programs in GPU pipeline which run simultaneously for lot of objects/vertices/inputs.
 
 ## 2026-03-21
-**Application of momentum conservation:** I had this misconception that a rocket pushes the air itself to propell itself to space. What actually happens is it pushes the fuel out ejecttimg mass at a very high speed in opposite direction of rocket's motion. The rocket get pushed in opposite direction so that the momentum is conserved.
+**Application of momentum conservation:** I had this misconception that a rocket pushes the air itself to propell itself to space. What actually happens is it pushes the fuel out ejecting mass at a very high speed in opposite direction of rocket's motion. The rocket get pushed in opposite direction so that the momentum is conserved.
 
 ## 2026-03-17
 **Center of Mass** (a geometric position) of a system of particles moves as if the mass of the whole system is concentrated at that point. **Force** is redefined as the rate of change of momentum, which is how Newton stated his second law. **Momentum** of a system is **conserved** even though the individual momenta of particles can change inside a closed system. Internal collisions do not change the path of the center of mass unless an external force acts on the system. Total change in momentum is defined to be **Impulse**, which is equivalent to the time integral of the force function from time t1 to t2. **Average force** acting would be defined as **Impulse per unit time.**
