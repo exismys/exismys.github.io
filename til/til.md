@@ -1,3 +1,12 @@
+## 2026-08-28
+**Debugging:** As Linus said "debugging session from hell...", spent a lot of time debugging a bug which caused appearence of some flickering long streak of horizontal lines at both north and south poles of rendered spheres.
+
+![long streak at pole](/assets/images/long-streak-at-pole.png)
+
+The issue was with my interpolation function. I was trying to interpolate all the x-coordinates for left and right boundary so I can rasterize a triangle using scanline. It turns out that I was using the slope calculation incorrectly: I calculated the slop as $\Delta{y}/\Delta{x}$ assuming I was working in continuous unit where the iteration step will be very small ($\to0$) but of course I am working with a computer so the step would be always in integer (1 pixel per step in my case). In other words, I calcuated rate of change for a small delta but actually step in the loop was higher. The fix was to calculate rate of change per pixel instead of instantaneous rate of change so that it matches the iteration steps. The change was very simple 😐: [github](https://github.com/exismys/BeLight/commit/d4e185d041c7e1bdabf67f1f50e32ac6acb024f2)
+
+**Created a new blog:** [Sphere Rasterization: How to Create a Sphere Mesh](/index.html#blog?post=2026-08-27-sphere-rasterization.md)
+
 ## 2026-08-24
 Continuing with the updates (this includes stuff I have been doing since Aug 7),
 
