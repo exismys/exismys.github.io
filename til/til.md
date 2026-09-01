@@ -1,9 +1,22 @@
+## 2026-09-01
+**Rasterization of a 3D arrow:** I needed to have a shape resembling an arrow so that I can use them as visualization tools in my physics simulations. They will be indicating the direction of force & current velocity. It's actually a fairly complex thing if you focus on the rasterizing the arrow itself but it can be easily done by combining the meshes of much simpler shapes: cylinder and cone. We can use a thin cylinder as shaft of the arrow and a cone as arrowhead. And as we created the vertices and triangles for the sphere, we do the same for the cylinder and the cone. We use the following mathematical observation:
+
+***Cylinder Rasterization:***
+![Cylinder Rasterization](/assets/images/cylinder-rast.png)
+
+***Cone Rasterization:***
+![Cone Rasterization](/assets/images/cone-rast.png)
+
+After these two rasterization are completed, we need to position them relative to each other. For example, we move all the vertices of cone by $\frac{h}{2}$ at the mesh level itself so that it's at the end of the cylinder resembling shaft and arrowhead respectively.
+
+**Rasterization of a plane:** Well, I also tried to rasterize a plane to represent some sort of reference surface but my frame rate droped around 5-10 FPS probably because of working with lots of triangles & pixels. So, I decided to do the same with grid lines but well it was even worse now because the there was no clipping implemented for lines 🙁 and the projected vertices in screen space were just two big specially the ones near camera (probably in range of millions of pixel wide because $z \to 0$). So, the obvious thing remains. I have to implement clipping for lines.
+
 ## 2026-08-28
-**Debugging:** As Linus said "debugging session from hell...", spent a lot of time debugging a bug which caused appearence of some flickering long streak of horizontal lines at both north and south poles of rendered spheres.
+**Debugging:** As Linus said "debugging session from hell...", spent a lot of time debugging a bug which caused appearences of some flickering long streak of horizontal lines at both north and south poles of rendered spheres.
 
 ![long streak at pole](/assets/images/long-streak-at-pole.png)
 
-The issue was with my interpolation function. I was trying to interpolate all the x-coordinates for left and right boundary so I can rasterize a triangle using scanline. It turns out that I was using the slope calculation incorrectly: I calculated the slop as $\Delta{y}/\Delta{x}$ assuming I was working in continuous unit where the iteration step will be very small ($\to0$) but of course I am working with a computer so the step would be always in integer (1 pixel per step in my case). In other words, I calcuated rate of change for a small delta but actually step in the loop was higher. The fix was to calculate rate of change per pixel instead of instantaneous rate of change so that it matches the iteration steps. The change was very simple 😐: [github](https://github.com/exismys/BeLight/commit/d4e185d041c7e1bdabf67f1f50e32ac6acb024f2)
+The issue was with my interpolation function. I was trying to interpolate all the x-coordinates for left and right boundary so that I can rasterize a triangle using scanline. It turns out that I was using the slope calculation incorrectly: I calculated the slop as $\Delta{y}/\Delta{x}$ assuming I was working in continuous unit where the iteration step will be very small ($\to0$) but of course I am working with a computer so the step would be always in integer (1 pixel per step in my case). In other words, I calcuated rate of change for a small delta but actually step in the loop was higher. The fix was to calculate rate of change per pixel instead of instantaneous rate of change so that it matches the iteration steps. The change was very simple 😐: [github](https://github.com/exismys/BeLight/commit/d4e185d041c7e1bdabf67f1f50e32ac6acb024f2)
 
 **Created a new blog:** [Sphere Rasterization: How to Create a Sphere Mesh](/index.html#blog?post=2026-08-27-sphere-rasterization.md)
 
