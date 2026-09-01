@@ -1,7 +1,7 @@
 # Sound Sampling: Creating a Sound of a Certain Frequency Programmatically
 
 **date:** `2025-09-07` `4:00` `UTC+5:30`  
-**tags:** `math` `physics` `audio`
+**tags:** `math` `physics` `audio` `programming`
 
 I am a sine wave.  
 I am continuous.  

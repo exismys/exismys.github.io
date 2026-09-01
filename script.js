@@ -91,15 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     const closeBtn = document.querySelector(".lightbox-close");
-    const gridImages = document.querySelectorAll(".image-grid img");
+    document.addEventListener("click", e => {
+        const img = e.target.closest(".image-grid img");
+        if (!img) return;
 
-    gridImages.forEach(img => {
-        img.addEventListener("click", () => {
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightbox.classList.add("active");
-            document.body.style.overflow = "hidden";
-        });
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden";
     });
 
     const closeLightbox = () => {

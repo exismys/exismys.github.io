@@ -1,7 +1,7 @@
 # Sphere Rasterization: How to Create a Sphere Mesh
 
 **date:** `2026-08-27` `4:00` `UTC+5:30`  
-**tags:** `math` `programming`       
+**tags:** `math` `programming` `graphics`      
 
 
 Mesh of an object is basically a description of all the descrete coordinates/vertices that constitute the object and how vertices could be joined together to form a set of fundamental rendering unit (like a triangle).
