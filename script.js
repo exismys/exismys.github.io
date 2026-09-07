@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxImg = document.getElementById("lightbox-img");
     const closeBtn = document.querySelector(".lightbox-close");
     document.addEventListener("click", e => {
-        const img = e.target.closest(".image-grid img");
+        const img = e.target.closest("img");
         if (!img) return;
 
         lightboxImg.src = img.src;

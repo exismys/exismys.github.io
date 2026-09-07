@@ -1,6 +1,25 @@
+## 2026-09-08
+**Clipping of Lines:** As I mentioned in the previous update, I have implemented clipping of lines. It was not that hard actually. I just needed to revise my clipping for triangles. 
+
+We have the equation of a plane as:
+$$\hat{N} \cdot \vec{P} - D = 0$$
+
+and we can represent the equation of a line in parametric form as:
+$$\vec{P} = \vec{A} + t(\vec{B} - \vec{A})$$
+where P traces the line we want to clip. At some point for a specific value of $t$, for the intersection between the line and the plane to occur, $\vec{P}$ must satisfy the equation of the plane. We can solve both equations to get the value of the intersection point and clip the at that point. 
+
+Using this, I am finally done with rasterizing efficient planes/grid layout :)
+
+**Cross Product Dilemna:** I had an unexpected issue with resolving the direction of my visualization arrow. Cross product between two vectors that I have implemented is inherently based on **right-hand coordinate system** which works on the following assumption:
+1. $\hat{i} \times \hat{j} = \hat{k}$
+2. $\hat{i} \to \hat{j}$ rotation considered +ve
+
+But as I am working with the **left-handed coordinate system**, $\hat{i} \to \hat{j}$ rotation would be considered -ve as seen from the $+z$ axis. So, in order to match my rotation convention I needed to inverse the result's sign.
+
+**Euler Angles:** Implemented functions to get two successive angles (rotation around z-axis and x-axis) to transform a vector solely y direction to another vector's direction. I need to generalize this yet so that I can do so for any two arbitrary vector.
+
 ## 2026-09-01
 **Rasterization of a 3D arrow:** I needed to have a shape resembling an arrow so that I can use them as visualization tools in my physics simulations. They will be indicating the direction of force & current velocity. It's actually a fairly complex thing if you focus on the rasterizing the arrow itself but it can be easily done by combining the meshes of much simpler shapes: cylinder and cone. We can use a thin cylinder as shaft of the arrow and a cone as arrowhead. And as we created the vertices and triangles for the sphere, we do the same for the cylinder and the cone. We use the following mathematical observation:
-
 
 ***Cylinder Rasterization:***
 ![Cylinder Rasterization](/assets/images/cylinder-rast.png)
