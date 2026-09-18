@@ -1,3 +1,10 @@
+# 2026-09-18
+**Automated Camera Revolution & Orientation:** As the name suggests :) I need to have a true 3D view into my simulations so I can record all the perspectives in some sort of video capture? Initially, it was a revolution around a fixed point, causing the objects to very soon go out of the view. The better solution was to change the pivot each frame so that it's the center of mass of whole object system.
+
+**Depth testing for lines:** Similar to triangles, I implemented depth testing for lines. Now, meshes which are composed of lines like grid mesh could be display in front or back of the object depending on their depth.
+
+**Vulkan:** And the most important and interesting part, learning vulkan. I have only managed to do the triangle ritual and there's a lot of things I still don't understand. It truely has been a daunting task. The goal here is to use a modern graphic API, and make some sort of physics engine.
+
 ## 2026-09-08
 **Clipping of Lines:** As I mentioned in the previous update, I have implemented clipping of lines. It was not that hard actually. I just needed to revise my clipping for triangles. 
 
