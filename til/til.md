@@ -1,4 +1,7 @@
-# 2026-09-18
+## 2026-09-27
+
+
+## 2026-09-18
 **Automated Camera Revolution & Orientation:** As the name suggests :) I need to have a true 3D view into my simulations so I can record all the perspectives in some sort of video capture? Initially, it was a revolution around a fixed point, causing the objects to very soon go out of the view. The better solution was to change the pivot each frame so that it's the center of mass of whole object system.
 
 **Depth testing for lines:** Similar to triangles, I implemented depth testing for lines. Now, meshes which are composed of lines like grid mesh could be display in front or back of the object depending on their depth.
